@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
+import { Container, CssBaseline } from '@mui/material'
 import { CacheProvider } from '@emotion/react'
 import createEmotionCache from '../styles/createEmotionCache'
 
@@ -15,14 +15,16 @@ export default function MyApp(props) {
 
 	return (
 		<CacheProvider value={emotionCache}>
-			<Head>
-				<title>Glenn Chon</title>
-				<meta name="viewport" content="initial-scale=1, width=device-width" />
-			</Head>
-			<ThemeProvider theme={DarkTheme}>
-				<CssBaseline />
-				<Component {...pageProps} />
-			</ThemeProvider>
+			<Container>
+				<Head>
+					<title>Glenn Chon</title>
+					<meta name="viewport" content="initial-scale=1, width=device-width" />
+				</Head>
+				<ThemeProvider theme={DarkTheme}>
+					<CssBaseline />
+					<Component {...pageProps} />
+				</ThemeProvider>
+			</Container>
 		</CacheProvider>
 	)
 }

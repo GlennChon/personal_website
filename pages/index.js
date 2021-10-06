@@ -2,21 +2,21 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Box, Container, CssBaseline, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { Monitor, Table, Keyboard } from '../components'
+import { Monitor, Desk, Keyboard } from '../components'
 
 export default function Home() {
 	const isBrowser = typeof window !== 'undefined'
 	const [windowInfo, setWindowInfo] = useState({
 		height: isBrowser ? `${window.innerHeight}px` : '100vh',
 		width: isBrowser ? `${window.innerWidth}px` : '100vw',
-		keyboardScale: isBrowser ? window.innerWidth / 2000 : 0.5,
+		scale: isBrowser ? window.innerWidth / 2000 : 0.5,
 	})
 	useEffect(() => {
 		const handleWindowResize = () => {
 			setWindowInfo({
 				height: `${window.innerHeight}px`,
 				width: `${window.innerWidth}px`,
-				keyboardScale: window.innerWidth / 2000,
+				scale: window.innerWidth / 2000,
 			})
 		}
 		window.addEventListener('resize', handleWindowResize)
@@ -24,32 +24,65 @@ export default function Home() {
 	}, [])
 	return (
 		<Box
-			component="div"
+			component={Grid}
+			container
 			role="main"
 			sx={{
-				background:
-					'linear-gradient(0deg, rgba(101,13,137,1) 0%, rgba(38,20,71,1) 33%, rgb(0, 0, 0) 100%)',
-				height: `${windowInfo.height}`,
-				width: `${windowInfo.width}`,
-				p: 3,
+				height: '100%',
+				width: '100%',
+				maxHeight: '100%',
+				position: 'relative',
+				m: 'auto',
+				// border: {
+				// 	xs: '1px solid black',
+				// 	sm: '1px solid orange',
+				// 	md: '1px solid red',
+				// 	lg: '1px solid green',
+				// 	xl: '1px solid blue',
+				// },
+
+				// border: '1px solid orange',
 			}}
 		>
+			{/* <h1>Glenn Chon</h1> */}
 			<Box
+				component={Grid}
+				item
 				sx={{
-					height: '100%',
-					position: 'relative',
-					maxHeight: '1280px',
-					maxWidth: '2032px',
+					// border: '1px solid blue',
+					height: 'auto',
+					width: '100%',
 				}}
 			>
-				<h1>Glenn Chon</h1>
-				<Monitor>test</Monitor>
-				<Table />
-				<Keyboard scale={windowInfo.keyboardScale} />
-				{windowInfo.keyboardScale}
-				<div />
-				{`${windowInfo.width}`}
+				<Monitor>Coming Soon...</Monitor>
 			</Box>
+			<Box
+				component={Grid}
+				item
+				sx={{
+					// border: '1px solid blue',
+					height: 'auto',
+					width: '100%',
+				}}
+			>
+				<Desk scale={windowInfo.scale} />
+			</Box>
+			<Box
+				component={Grid}
+				item
+				sx={{
+					// border: '1px solid blue',
+					height: 'auto',
+					width: '100%',
+				}}
+			>
+				<Keyboard scale={windowInfo.scale} />
+			</Box>
+			{/* 
+				Keyboard: WhiteFox
+				Switches: Cherry MX Clear
+				Keycaps: Jessica GMK Plum
+				*/}
 		</Box>
 	)
 }
