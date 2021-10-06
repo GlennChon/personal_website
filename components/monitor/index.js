@@ -6,21 +6,21 @@ const Monitor = (props) => {
 			className="monitor-container"
 			component={Grid}
 			container
-			xs={12}
 			sx={{
-				height: 'calc(60vw * 0.4285)',
+				height: 'calc(70vw * 0.5)',
 				width: '100%',
-				p: 1,
+				maxHeight: '412px',
+				border: '1px solid red',
 			}}
 		>
-			<Grid
+			<Box
 				className="monitor"
+				component={Grid}
 				container
-				xs={7}
 				item
+				xs={10}
 				sx={{
-					height: '100%',
-					width: '60%',
+					maxWidth: '1024px',
 					m: '0 auto',
 				}}
 			>
@@ -28,7 +28,6 @@ const Monitor = (props) => {
 					className="monitor-bezel"
 					component={Grid}
 					container
-					xs={11}
 					item
 					sx={{
 						height: '100%',
@@ -37,7 +36,6 @@ const Monitor = (props) => {
 						bgcolor: 'black',
 						border: { xs: '1px solid #C0C0C0', md: '2px solid #C0C0C0' },
 						p: 1,
-						zIndex: 1,
 						'box-shadow':
 							'0 0 5px rgba(40, 62, 115, .4), 0 0 10px rgba(40, 62, 115, .4), 0 0 15px rgba(40, 62, 115, .1), 0 0 20px rgba(40, 62, 115, .4), 0 0 40px rgba(40, 62, 115, .4), 0 0 60px rgba(40, 62, 115, .4)',
 					}}
@@ -45,6 +43,7 @@ const Monitor = (props) => {
 					<Box
 						className="monitor-screen"
 						component={Grid}
+						container
 						item
 						sx={{
 							height: '100%',
@@ -54,11 +53,13 @@ const Monitor = (props) => {
 							backgroundRepeat: 'no-repeat',
 							backgroundPosition: 'center center',
 							backgroundSize: 'cover',
+							p: 1,
 						}}
 					>
 						{props.children}
 					</Box>
 					<Box
+						component="div"
 						className="monitor-pwr"
 						sx={{
 							position: 'relative',
@@ -71,42 +72,7 @@ const Monitor = (props) => {
 						}}
 					/>
 				</Box>
-				<Grid
-					className="monitor-right-container"
-					container
-					xs={1}
-					item
-					sx={{
-						height: '100%',
-						width: 'auto',
-						display: { xs: 'none', md: 'inline' },
-						p: {
-							md: '.65% 0',
-							lg: '.6% 0',
-							xl: '.55% 0',
-						},
-					}}
-				>
-					<Box
-						className="monitor-right"
-						component={Grid}
-						item
-						sx={{
-							height: '100%',
-							width: '20%',
-							position: 'relative',
-							left: {
-								md: '-10%',
-								lg: '-9%',
-								xl: '-5.5%',
-							},
-							borderRadius: '0 10px 10px',
-							backgroundImage: 'linear-gradient(white 0%, gray 100%)',
-							transform: 'perspective( 15vw ) rotateY( 45deg )',
-						}}
-					/>
-				</Grid>
-			</Grid>
+			</Box>
 		</Box>
 	)
 }
