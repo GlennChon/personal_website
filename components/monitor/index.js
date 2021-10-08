@@ -10,7 +10,6 @@ const Monitor = (props) => {
 				height: 'calc(70vw * 0.5)',
 				width: '100%',
 				maxHeight: '412px',
-				border: '1px solid red',
 			}}
 		>
 			<Box
@@ -20,7 +19,7 @@ const Monitor = (props) => {
 				item
 				xs={10}
 				sx={{
-					maxWidth: '1024px',
+					maxWidth: '1920px',
 					m: '0 auto',
 				}}
 			>

@@ -131,13 +131,13 @@ const Desk = (props) => {
 			className="desk-container"
 			component={Grid}
 			container
+			item
 			sx={{
 				height: 'calc(70vw * 0.5)',
 				width: '100%',
 				maxHeight: '412px',
-				border: '1px solid red',
 				'*, *::after, *::before': {
-					m: 0,
+					m: 'auto',
 					p: 0,
 					'box-sizing': 'border-box',
 					'transform-style': 'preserve-3d',
@@ -156,8 +156,8 @@ const Desk = (props) => {
 					m: '0 auto',
 					// change perspective
 					transform:
-						// 'perspective(2000px) rotateX(180deg) rotateY(0deg) rotateZ(0deg)',
-						'perspective(2000px) rotateX(75deg) rotateY(0deg) rotateZ(0deg)',
+						'perspective(2000px) rotateX(50deg) rotateY(0deg) rotateZ(0deg)',
+					// 'perspective(2000px) rotateX(90deg) rotateY(0deg) rotateZ(0deg)',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'center',
@@ -344,7 +344,9 @@ const Desk = (props) => {
 						transform: 'rotateY(0deg) translateZ(5px)',
 						position: 'absolute',
 					}}
-				/>
+				>
+					{props.children}
+				</Box>
 				<Box
 					className="desk-bottom"
 					component={Grid}
