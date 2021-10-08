@@ -3,11 +3,10 @@ import Image from 'next/image'
 import { Box, Container, CssBaseline, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Monitor, Desk, Keyboard } from '../components'
-import { ViewportProvider } from '../utils/ViewportProvider'
 
 export default function Home() {
 	return (
-		<ViewportProvider>
+		<Container maxWidth="lg">
 			<Box
 				component={Grid}
 				container
@@ -32,6 +31,7 @@ export default function Home() {
 				{/* <h1>Glenn Chon</h1> */}
 				<Box
 					component={Grid}
+					container
 					item
 					sx={{
 						height: 'auto',
@@ -42,6 +42,7 @@ export default function Home() {
 				</Box>
 				<Box
 					component={Grid}
+					container
 					item
 					xs={12}
 					sx={{
@@ -60,6 +61,6 @@ export default function Home() {
 				Keycaps: Jessica GMK Plum
 			*/}
 			</Box>
-		</ViewportProvider>
+		</Container>
 	)
 }

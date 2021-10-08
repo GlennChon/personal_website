@@ -6,6 +6,7 @@ import createEmotionCache from '../styles/createEmotionCache'
 
 import '/styles/globals.css'
 import { DarkTheme, LightTheme } from '../styles/theme'
+import { ViewportProvider } from '../utils/ViewportProvider'
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
@@ -15,7 +16,7 @@ export default function MyApp(props) {
 
 	return (
 		<CacheProvider value={emotionCache}>
-			<Container>
+			<ViewportProvider>
 				<Head>
 					<title>Glenn Chon</title>
 					<meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -24,7 +25,7 @@ export default function MyApp(props) {
 					<CssBaseline />
 					<Component {...pageProps} />
 				</ThemeProvider>
-			</Container>
+			</ViewportProvider>
 		</CacheProvider>
 	)
 }
