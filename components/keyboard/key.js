@@ -3,7 +3,11 @@ import { useEffect, useState } from 'react'
 import { useViewport } from '../../utils/ViewportProvider'
 const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
 	const textColor = variant === 'main' ? '#5D5D6A' : '#EBDFC3'
-	const zColor = { main: '#EBDFC3', accent: '#5D5D6A', special: '#946062' }
+	const zColor = { 
+		main: {primary:'#EBDFC3', dark:'#CFC4AC'}, 
+		accent: {primary:'#5D5D6A', dark:'#464650'}, 
+		special: {primary:'#946062', dark:'#734B4C'} 
+	}
 	const yColor = { main: '#C8B68C', accent: '#242328', special: '#5D2C26' }
 	const xColor = {
 		main: 'linear-gradient(to bottom, #FEFAC9, #D0BD8A)',
@@ -18,7 +22,7 @@ const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
 
 	useEffect(() => {
 		const boardWidth = width / 3
-		const maxBWidth = 1920 / 3
+		const maxBWidth = 1280 / 3
 		const calculatedWidth = boardWidth < maxBWidth ? boardWidth : maxBWidth
 		const kWidth = calculatedWidth / 20
 		setKeyWidth(kWidth)
@@ -29,7 +33,7 @@ const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
 
 	return (
 		<Box
-			className="key"
+			className="keycap"
 			component="div"
 			sx={{
 				height: `${keyHeight}px`,
@@ -93,9 +97,10 @@ const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
 					height: `100%`,
 					width: `100%`,
 					transform: `rotateY(0deg) translateZ(${keyDepth}px)`,
-					bgcolor: zColor[`${variant}`],
+					bgcolor: zColor[`${variant}`].primary,
 					textAlign: 'center',
 					position: 'absolute',
+					backgroundImage: `radial-gradient(${zColor[`${variant}`].primary} 50%, ${zColor[`${variant}`].dark})`
 				}}
 			>
 				<Box
@@ -119,7 +124,7 @@ const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
 					height: `100%`,
 					width: `100%`,
 					transform: `rotateY(180deg)`,
-					bgcolor: zColor[`${variant}`],
+					bgcolor: zColor[`${variant}`].primary,
 					position: 'absolute',
 				}}
 			/>
@@ -133,7 +138,7 @@ const KeyRow = (props) => {
 
 	useEffect(() => {
 		const boardWidth = width / 3
-		const maxBWidth = 1920 / 3
+		const maxBWidth = 1280 / 3
 		const calculatedWidth = boardWidth < maxBWidth ? boardWidth : maxBWidth
 		const kWidth = calculatedWidth / 16
 		setKeyDepth(kWidth * 0.5)

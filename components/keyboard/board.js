@@ -8,7 +8,7 @@ const Board = (props) => {
 	const [boardDepth, setBoardDepth] = useState()
 	useEffect(() => {
 		const bWidth = width / 3
-		const maxBWidth = 1920 / 3
+		const maxBWidth = 1280 / 3
 		const calculatedWidth = bWidth < maxBWidth ? bWidth : maxBWidth
 		setBoardWidth(calculatedWidth)
 		setBoardHeight(calculatedWidth * 0.35)

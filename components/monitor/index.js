@@ -19,7 +19,7 @@ const Monitor = (props) => {
 				item
 				xs={10}
 				sx={{
-					maxWidth: '1920px',
+					maxWidth: '1280px',
 					m: '0 auto',
 				}}
 			>

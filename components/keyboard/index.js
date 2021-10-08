@@ -57,7 +57,7 @@ const Keyboard = (props) => {
 				display: { xs: 'none', sm: 'flex' },
 				height: '100%',
 				width: '100%',
-				maxWidth: '1920px',
+				maxWidth: '1280px',
 				//flex
 				justifyContent: 'center',
 				alignItems: 'center',
