@@ -5,10 +5,8 @@ const viewportContext = createContext({})
 
 export const ViewportProvider = ({ children }) => {
 	const theme = useTheme()
-	const [width, setWidth] = useState(window.innerWidth)
-	const [height, setHeight] = useState(window.innerHeight)
-	const [isMobile, setIsMobile] = useState(false)
-	const queryMobile = !useMediaQuery(theme.breakpoints.up('md'))
+	const [width, setWidth] = useState()
+	const [height, setHeight] = useState()
 
 	useEffect(() => {
 		const handleWindowResize = () => {
@@ -16,27 +14,15 @@ export const ViewportProvider = ({ children }) => {
 			setHeight(window.innerHeight)
 		}
 		window.addEventListener('resize', handleWindowResize)
-
+		handleWindowResize()
 		return () => window.removeEventListener('resize', handleWindowResize)
 	}, [])
-	useEffect(() => {
-		const checkMobile = () => {
-			const ua = navigator.userAgent
-			setIsMobile(
-				/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
-					ua,
-				) || queryMobile,
-			)
-		}
-		checkMobile()
-	}, [queryMobile])
 
 	return (
 		<viewportContext.Provider
 			value={{
 				width,
 				height,
-				isMobile,
 			}}
 		>
 			{children}
@@ -45,10 +31,9 @@ export const ViewportProvider = ({ children }) => {
 }
 
 export const useViewport = () => {
-	const { width, height, isMobile } = useContext(viewportContext)
+	const { width, height } = useContext(viewportContext)
 	return {
 		width,
 		height,
-		isMobile,
 	}
 }
