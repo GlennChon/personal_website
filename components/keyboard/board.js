@@ -6,15 +6,16 @@ const Board = (props) => {
 	const [boardWidth, setBoardWidth] = useState()
 	const [boardHeight, setBoardHeight] = useState()
 	const [boardDepth, setBoardDepth] = useState()
+
 	useEffect(() => {
 		const bWidth = width / 3
-		const maxBWidth = 1280 / 3
+		const maxBWidth = props.mbWidth || 1280 / 3
 		const calculatedWidth = bWidth < maxBWidth ? bWidth : maxBWidth
 		setBoardWidth(calculatedWidth)
 		setBoardHeight(calculatedWidth * 0.35)
 		setBoardDepth(calculatedWidth * (1 / 25.75))
-	})
-	//32.7025 /1.27
+	}, [width])
+
 	return (
 		<Box
 			className="keyboard"

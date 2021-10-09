@@ -1,12 +1,18 @@
 import { Box } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useViewport } from '../../utils/ViewportProvider'
-const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
+const Key = ({
+	char = '',
+	size = 1,
+	variant = 'main',
+	blank = false,
+	mbWidth,
+}) => {
 	const textColor = variant === 'main' ? '#5D5D6A' : '#EBDFC3'
-	const zColor = { 
-		main: {primary:'#EBDFC3', dark:'#CFC4AC'}, 
-		accent: {primary:'#5D5D6A', dark:'#464650'}, 
-		special: {primary:'#946062', dark:'#734B4C'} 
+	const zColor = {
+		main: { primary: '#EBDFC3', dark: '#CFC4AC' },
+		accent: { primary: '#5D5D6A', dark: '#464650' },
+		special: { primary: '#946062', dark: '#734B4C' },
 	}
 	const yColor = { main: '#C8B68C', accent: '#242328', special: '#5D2C26' }
 	const xColor = {
@@ -22,14 +28,14 @@ const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
 
 	useEffect(() => {
 		const boardWidth = width / 3
-		const maxBWidth = 1280 / 3
+		const maxBWidth = mbWidth || 1280 / 3
 		const calculatedWidth = boardWidth < maxBWidth ? boardWidth : maxBWidth
 		const kWidth = calculatedWidth / 20
 		setKeyWidth(kWidth)
 		setKeyHeight(kWidth * 0.9)
 		setKeyDepth(kWidth * 0.5)
 		console.log(kWidth, kWidth * 0.9, kWidth * 0.5)
-	})
+	}, [width])
 
 	return (
 		<Box
@@ -100,7 +106,9 @@ const Key = ({ char = '', size = 1, variant = 'main', blank = false }) => {
 					bgcolor: zColor[`${variant}`].primary,
 					textAlign: 'center',
 					position: 'absolute',
-					backgroundImage: `radial-gradient(${zColor[`${variant}`].primary} 50%, ${zColor[`${variant}`].dark})`
+					backgroundImage: `radial-gradient(${
+						zColor[`${variant}`].primary
+					} 50%, ${zColor[`${variant}`].dark})`,
 				}}
 			>
 				<Box
@@ -138,11 +146,11 @@ const KeyRow = (props) => {
 
 	useEffect(() => {
 		const boardWidth = width / 3
-		const maxBWidth = 1280 / 3
+		const maxBWidth = props.mbWidth || 1280 / 3
 		const calculatedWidth = boardWidth < maxBWidth ? boardWidth : maxBWidth
 		const kWidth = calculatedWidth / 16
 		setKeyDepth(kWidth * 0.5)
-	})
+	}, [width])
 	return (
 		<Box
 			className="key-row"

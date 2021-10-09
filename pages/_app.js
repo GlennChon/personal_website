@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { ThemeProvider } from '@mui/material/styles'
-import { Container, CssBaseline } from '@mui/material'
+import { Box, Container, CssBaseline } from '@mui/material'
 import { CacheProvider } from '@emotion/react'
 import createEmotionCache from '../styles/createEmotionCache'
 
@@ -11,7 +11,7 @@ import { ViewportProvider } from '../utils/ViewportProvider'
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
 
-export default function MyApp(props) {
+function MyApp(props) {
 	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 
 	return (
@@ -22,10 +22,16 @@ export default function MyApp(props) {
 					<meta name="viewport" content="initial-scale=1, width=device-width" />
 				</Head>
 				<ThemeProvider theme={DarkTheme}>
-					<CssBaseline />
-					<Component {...pageProps} />
+					<Box
+						component="div"
+						sx={{ height: '100vh', width: '100vw', p: '10%' }}
+					>
+						<CssBaseline />
+						<Component {...pageProps} />
+					</Box>
 				</ThemeProvider>
 			</ViewportProvider>
 		</CacheProvider>
 	)
 }
+export default MyApp
