@@ -24,7 +24,10 @@ function MyApp(props) {
 				<ThemeProvider theme={DarkTheme}>
 					<Box
 						component="div"
-						sx={{ height: '100vh', width: '100vw', p: '10%' }}
+						sx={{
+							height: '100vh',
+							width: '100%',
+						}}
 					>
 						<CssBaseline />
 						<Component {...pageProps} />

@@ -12,6 +12,7 @@ const Monitor = (props) => {
 				m: { xs: '0 auto' },
 				height: '100%',
 				width: '100%',
+				
 				position: 'relative',
 				border: '1px solid red',
 			}}
