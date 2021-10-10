@@ -1,5 +1,6 @@
 import { Box, Grid } from '@mui/material'
 import { useEffect, useState } from 'react'
+import { jsx, css, keyframes } from '@emotion/react'
 const Wallpaper = '/static/images/retrowave.jpg'
 const Monitor = ({ containerWidth, children }) => {
 	const [screenWidth, setScreenWidth] = useState()
@@ -12,6 +13,21 @@ const Monitor = ({ containerWidth, children }) => {
 		setScreenWidth(calculated)
 		setScreenHeight(screenWidth * (9 / 21))
 	})
+	const glow = keyframes`
+		from, 0%, 100%, to {
+			box-shadow: 0 0 40px rgba(40, 62, 115, .4); 
+		}
+		20%, 80% { 
+			box-shadow: 0 0 50px rgba(40, 62, 115, .5);
+		}
+		40%, 60% { 
+			box-shadow: 0 0 60px rgba(40, 62, 115, .6);
+		}
+		50% {
+			box-shadow: 0 0 70px rgba(40, 62, 115, .8);
+		}
+	
+	`
 
 	return (
 		<Box
@@ -42,8 +58,7 @@ const Monitor = ({ containerWidth, children }) => {
 					bgcolor: 'black',
 					border: { xs: '1px solid #C0C0C0', md: '2px solid #C0C0C0' },
 					p: 1,
-					'box-shadow':
-						'0 0 5px rgba(40, 62, 115, .4), 0 0 10px rgba(40, 62, 115, .4), 0 0 15px rgba(40, 62, 115, .1), 0 0 20px rgba(40, 62, 115, .4), 0 0 40px rgba(40, 62, 115, .4), 0 0 60px rgba(40, 62, 115, .4)',
+					animation: `${glow} 3s ease-in alternate infinite`,
 				}}
 			>
 				<Box
