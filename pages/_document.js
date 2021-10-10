@@ -2,7 +2,6 @@ import * as React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from '../styles/createEmotionCache'
-import { DarkTheme, LightTheme } from '../styles/theme'
 
 export default class MyDocument extends Document {
 	render() {
@@ -10,7 +9,7 @@ export default class MyDocument extends Document {
 			<Html lang="en">
 				<Head>
 					{/* PWA primary color */}
-					<meta name="theme-color" content={DarkTheme.palette.primary.main} />
+					<meta name="theme-color" content={'#0B1015'} />
 					<link rel="preconnect" href="https://fonts.googleapis.com" />
 					<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
 					<link
