@@ -8,6 +8,11 @@ import useElementSize from '../utils/useElementSize'
 export default function Home() {
 	const objectContainerRef = useRef(null)
 	const { width, height } = useElementSize(objectContainerRef)
+	const [containerWidth, setContainerWidth] = useState(width - 100)
+
+	useEffect(() => {
+		setContainerWidth(width - 100)
+	})
 
 	return (
 		<Box
@@ -17,8 +22,8 @@ export default function Home() {
 			container
 			role="main"
 			sx={{
-				height: 'calc(100% - 100px)',
-				width: 'calc(100% - 100px)',
+				height: 'calc(100vh - 100px)',
+				width: 'calc(100vw - 100px)',
 				m: '50px',
 				position: 'relative',
 				// m: 'auto',
@@ -29,7 +34,7 @@ export default function Home() {
 				// 	lg: '1px solid green',
 				// 	xl: '1px solid blue',
 				// },
-				border: '1px solid orange',
+				// border: '1px solid orange',
 			}}
 		>
 			{/* <h1>Glenn Chon</h1> */}
@@ -39,17 +44,16 @@ export default function Home() {
 				// container
 				item
 				sx={{
-					height: { xs: '100%', sm: `calc(${width}px * (9/21))` },
+					height: `100%`,
 					width: '100%',
 					maxWidth: '1200px',
-					maxHeight: 'calc(1200px * (9 / 21))',
-					border: {
-						xs: '1px solid black',
-						sm: '1px solid orange',
-						md: '1px solid red',
-						lg: '1px solid green',
-						xl: '1px solid blue',
-					},
+					// border: {
+					// 	xs: '1px solid black',
+					// 	sm: '1px solid orange',
+					// 	md: '1px solid red',
+					// 	lg: '1px solid green',
+					// 	xl: '1px solid blue',
+					// },
 					m: '0 auto',
 					'*, *::after, *::before': {
 						'box-sizing': 'border-box',
@@ -57,9 +61,9 @@ export default function Home() {
 					},
 				}}
 			>
-				<Monitor>Coming Soon...</Monitor>
-				<Desk>
-					<Keyboard />
+				<Monitor containerWidth={containerWidth}>Coming Soon...</Monitor>
+				<Desk containerWidth={containerWidth}>
+					<Keyboard containerWidth={containerWidth} />
 				</Desk>
 			</Box>
 

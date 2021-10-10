@@ -1,12 +1,11 @@
 import { Box } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { useViewport } from '../../utils/ViewportProvider'
 const Key = ({
 	char = '',
 	size = 1,
 	variant = 'main',
 	blank = false,
-	mbWidth,
+	width,
 }) => {
 	const textColor = variant === 'main' ? '#5D5D6A' : '#EBDFC3'
 	const zColor = {
@@ -21,20 +20,15 @@ const Key = ({
 		special: 'linear-gradient(to bottom, #bc7377, #b46266)',
 	}
 
-	const { width, height } = useViewport()
 	const [keyWidth, setKeyWidth] = useState()
 	const [keyHeight, setKeyHeight] = useState()
 	const [keyDepth, setKeyDepth] = useState()
 
 	useEffect(() => {
-		const boardWidth = width / 3
-		const maxBWidth = mbWidth || 1280 / 3
-		const calculatedWidth = boardWidth < maxBWidth ? boardWidth : maxBWidth
-		const kWidth = calculatedWidth / 20
+		const kWidth = width / 20
 		setKeyWidth(kWidth)
 		setKeyHeight(kWidth * 0.9)
 		setKeyDepth(kWidth * 0.5)
-		console.log(kWidth, kWidth * 0.9, kWidth * 0.5)
 	}, [width])
 
 	return (
@@ -115,7 +109,7 @@ const Key = ({
 					className="key-text"
 					component="span"
 					sx={{
-						fontSize: { xs: `calc(${keyWidth}px * .33)` },
+						fontSize: { xs: `calc(${keyWidth}px * (3.5 / 10))` },
 						color: textColor,
 						position: 'absolute',
 						top: 0.75,
@@ -125,31 +119,16 @@ const Key = ({
 					{char}
 				</Box>
 			</Box>
-			<Box
-				className="key-bottom"
-				component="div"
-				sx={{
-					height: `100%`,
-					width: `100%`,
-					transform: `rotateY(180deg)`,
-					bgcolor: zColor[`${variant}`].primary,
-					position: 'absolute',
-				}}
-			/>
 		</Box>
 	)
 }
 
-const KeyRow = (props) => {
-	const { width, height } = useViewport()
+const KeyRow = ({ width, children }) => {
 	const [keyDepth, setKeyDepth] = useState()
 
 	useEffect(() => {
-		const boardWidth = width / 3
-		const maxBWidth = props.mbWidth || 1280 / 3
-		const calculatedWidth = boardWidth < maxBWidth ? boardWidth : maxBWidth
-		const kWidth = calculatedWidth / 16
-		setKeyDepth(kWidth * 0.5)
+		const keyWidth = width / 16
+		setKeyDepth(keyWidth * 0.5)
 	}, [width])
 	return (
 		<Box
@@ -161,10 +140,10 @@ const KeyRow = (props) => {
 				flexWrap: 'wrap',
 				width: '100%',
 				transform: `translateZ(calc(${keyDepth}px / 2))`,
-				p: '0 2px',
+				p: '0 5px',
 			}}
 		>
-			{props.children}
+			{children}
 		</Box>
 	)
 }

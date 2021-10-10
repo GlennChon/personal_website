@@ -25,7 +25,7 @@ function MyApp(props) {
 					<Box
 						component="div"
 						sx={{
-							height: '100vh',
+							height: '100%',
 							width: '100%',
 						}}
 					>

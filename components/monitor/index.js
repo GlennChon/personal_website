@@ -1,6 +1,18 @@
 import { Box, Grid } from '@mui/material'
+import { useEffect, useState } from 'react'
 const Wallpaper = '/static/images/retrowave.jpg'
-const Monitor = (props) => {
+const Monitor = ({ containerWidth, children }) => {
+	const [screenWidth, setScreenWidth] = useState()
+	const [screenHeight, setScreenHeight] = useState()
+	const [maxContainerWidth] = useState(1000)
+
+	useEffect(() => {
+		const calculated =
+			containerWidth < maxContainerWidth ? containerWidth : maxContainerWidth
+		setScreenWidth(calculated)
+		setScreenHeight(screenWidth * (9 / 21))
+	})
+
 	return (
 		<Box
 			className="monitor"
@@ -9,12 +21,13 @@ const Monitor = (props) => {
 			item
 			xs={12}
 			sx={{
-				m: { xs: '0 auto' },
-				height: '100%',
-				width: '100%',
-				
+				display: 'flex',
+				m: '0 auto',
+				height: { xs: '100%', sm: `${screenHeight}px` },
+				width: `${screenWidth}px`,
+				justifyContent: 'center',
+				alignItems: 'center',
 				position: 'relative',
-				border: '1px solid red',
 			}}
 		>
 			<Box
@@ -49,7 +62,7 @@ const Monitor = (props) => {
 						p: 1,
 					}}
 				>
-					{props.children}
+					{children}
 				</Box>
 				<Box
 					component="div"
