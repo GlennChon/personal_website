@@ -9,11 +9,11 @@ export default function Home() {
 	const { width, height } = useElementSize(objectContainerRef)
 	const [switchWallpaper, setSwitchWallpaper] = useState<boolean>(false)
 
-	// alternates switchWallpaper boolean every 5 minutes
+	// alternates switchWallpaper boolean every 2.5 minutes
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setSwitchWallpaper((prev) => !prev)
-		}, 300000)
+		}, 150000)
 		return () => clearInterval(interval)
 	})
 	// prevents wallpaper switch on window resize
@@ -46,11 +46,6 @@ export default function Home() {
 				item
 				sx={{
 					height: '100%',
-					position: 'relative',
-					'*, *::after': {
-						boxSizing: 'border-box',
-						transformStyle: 'preserve-3d',
-					},
 				}}
 			>
 				<Monitor
@@ -58,12 +53,33 @@ export default function Home() {
 					containerHeight={height}
 					wallpaper={wallpaperSrc}
 				>
-					Coming Soon...
+					<Box
+						sx={{
+							m: 'auto',
+							backgroundColor: 'rgb(255, 255, 255, .7)',
+							p: 3,
+							borderRadius: 3,
+							border: '1px solid yellow',
+						}}
+					>
+						<Typography>Coming Soon...</Typography>
+					</Box>
 				</Monitor>
 
-				<Desk containerWidth={width}>
-					<Keyboard containerWidth={width} />
-				</Desk>
+				<Box
+					component="div"
+					sx={{
+						position: 'relative',
+						'*, *::after': {
+							boxSizing: 'border-box',
+							transformStyle: 'preserve-3d',
+						},
+					}}
+				>
+					<Desk containerWidth={width}>
+						<Keyboard containerWidth={width} />
+					</Desk>
+				</Box>
 			</Box>
 		</Box>
 

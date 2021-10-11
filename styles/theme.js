@@ -35,6 +35,10 @@ const getDesignTokens = (mode) => ({
 					background: { default: '#0D0D0D', paper: '#0D0D0D' },
 			  }),
 	},
+	typography: {
+		fontFamily: ['"Audiowide"', 'Lato'].join(','),
+		// overline: { textTransform: 'uppercase' },
+	},
 })
 
 export { getDesignTokens }

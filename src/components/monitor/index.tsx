@@ -1,4 +1,5 @@
-import { Box, Grid, Typography } from '@mui/material'
+import * as React from 'react'
+import { Box, Grid, IconButton, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { keyframes } from '@emotion/react'
 import Image from 'next/image'
@@ -9,6 +10,7 @@ import {
 	VolumeDown,
 	Wifi,
 } from '@mui/icons-material'
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
 
 const Monitor = ({ containerWidth, containerHeight, wallpaper, children }) => {
 	const [screenWidth, setScreenWidth] = useState<number>(0)
@@ -39,9 +41,8 @@ const Monitor = ({ containerWidth, containerHeight, wallpaper, children }) => {
 	})
 
 	const toolbarIcon = {
+		fontSize: '100%',
 		color: 'white',
-		my: 'auto',
-		fontSize: '1.5em',
 	}
 	const mobileOnlyIcon = { ...toolbarIcon, display: { xs: 'flex', sm: 'none' } }
 	const desktopOnlyIcon = {
@@ -100,106 +101,167 @@ const Monitor = ({ containerWidth, containerHeight, wallpaper, children }) => {
 				}}
 			>
 				<Box
+					component="div"
+					className="monitor-pwr"
+					sx={{
+						position: 'absolute',
+						borderRadius: '30%',
+						bottom: 4,
+						left: 10,
+						height: '.2%',
+						minHeight: '1px',
+						width: '1%',
+						background: 'green',
+						display: { xs: 'none', sm: 'flex' },
+					}}
+				/>
+				<Box
+					component="div"
+					className="phone-speaker"
+					sx={{
+						position: 'absolute',
+						m: '0 auto',
+						top: 2.5,
+						right: 0,
+						left: 0,
+						height: '1px',
+						width: '20%',
+						background: 'silver',
+						display: { xs: 'flex', sm: 'none' },
+					}}
+				/>
+				<Box
 					className="monitor-screen"
 					component={Grid}
+					container
 					item
+					direction="column"
+					justifyContent={{ xs: 'space-between', sm: 'flex-end' }}
 					sx={{
 						height: '100%',
 						width: '100%',
 						borderRadius: 1,
-						p: 1,
+						background: `url(${wallpaper}) no-repeat 50% center / cover`,
 					}}
 				>
-					<Image
-						alt="Mountains"
-						src={wallpaper}
-						layout="fill"
-						objectFit="cover"
-						quality={100}
-					/>
-					{children}
-					<Box
-						component="div"
-						className="monitor-pwr"
-						sx={{
-							position: 'absolute',
-							borderRadius: '30%',
-							bottom: -5,
-							left: '3px',
-							height: '.2%',
-							minHeight: '1px',
-							width: '1%',
-							background: 'green',
-							display: { xs: 'none', sm: 'flex' },
-						}}
-					/>
-					<Box
-						component="div"
-						className="phone-speaker"
-						sx={{
-							position: 'absolute',
-							m: '0 auto',
-							top: -4.5,
-							right: 0,
-							left: 0,
-							height: '1px',
-							width: '20%',
-							background: 'silver',
-							display: { xs: 'flex', sm: 'none' },
-						}}
-					/>
 					<Box
 						className="toolbar"
 						component={Grid}
 						container
+						item
+						order={{ sm: 2 }}
 						direction="row"
-						alignItems={{ xs: 'flex-start', sm: 'flex-end' }}
+						alignItems={{ xs: 'flex-start', sm: 'center' }}
+						justifyContent={{ xs: 'space-between', sm: 'flex-end' }}
 						sx={{
-							position: 'absolute',
-							top: 0,
-							left: 0,
-							right: 0,
-							bottom: 0,
-							height: '100%',
-							width: '100%',
-							color: 'white',
-							fontSize: `calc(100% * .4)`,
+							px: 1,
+							bgcolor: {
+								sm: 'rgb(46, 55, 67, .75)',
+							},
 						}}
 					>
-						<Grid
+						<Box
+							className="menu-btn-container"
+							component={Grid}
 							container
 							item
-							direction="column"
-							justifyContent={{ xs: 'space-between', sm: 'flex-end' }}
+							direction="row"
+							justifyContent="flex-end"
+							alignItems="center"
+							sm={6}
 							sx={{
-								height: { xs: '2.5%', sm: '6%' },
-								mx: 'auto',
-								width: '100%',
-								bgcolor: { sm: 'rgb(46, 55, 67, .75)' },
+								...desktopOnlyIcon,
+								justifySelf: 'center',
 							}}
 						>
-							<Grid item sx={{ ...toolbarIcon, display: { sm: 'none' } }}>
-								{time}
+							<Grid item>
+								<IconButton aria-label="Mobile Menu Button" sx={{}}>
+									<CircleOutlinedIcon
+										className="menu-button"
+										sx={{
+											position: 'absolute',
+											right: -8,
+											color: 'white',
+											fontSize: '60%',
+										}}
+									/>
+								</IconButton>
 							</Grid>
-							<Grid
+						</Box>
+						<Box
+							component={Grid}
+							container
+							item
+							direction="row"
+							alignItems={{ xs: 'flex-start', sm: 'flex-end' }}
+							justifyContent={{ xs: 'space-between', sm: 'flex-end' }}
+							xs={12}
+							sm={6}
+						>
+							<Box
+								className="time"
+								component={Grid}
 								item
+								xs={3}
+								sm={3}
+								md={2}
+								order={{ xs: 1, sm: 2 }}
 								sx={{
-									height: '100%',
-									display: 'flex',
-									flexDirection: 'row',
-									justifyContent: 'flex-end',
-									px: 1,
+									...toolbarIcon,
+									fontSize: '68%',
+									textAlign: { xs: 'left', sm: 'center' },
 								}}
 							>
-								<VolumeDown sx={toolbarIcon} />
-								<Wifi sx={toolbarIcon} />
-								<FiveG sx={mobileOnlyIcon} />
-								<SignalCellularAlt sx={mobileOnlyIcon} />
-								<Battery90 sx={mobileOnlyIcon} />
-								<Box sx={{ ...desktopOnlyIcon, ml: 1 }}>{time}</Box>
+								<span>{time}</span>
+							</Box>
+							<Grid item order={{ xs: 2, sm: 1 }}>
+								<Stack
+									className="icon-container-item"
+									direction="row"
+									justifyContent="flex-end"
+									alignItems="center"
+								>
+									<VolumeDown sx={toolbarIcon} />
+									<Wifi sx={toolbarIcon} />
+									<FiveG sx={mobileOnlyIcon} />
+									<SignalCellularAlt sx={mobileOnlyIcon} />
+									<Battery90 sx={mobileOnlyIcon} />
+								</Stack>
 							</Grid>
-						</Grid>
+						</Box>
 					</Box>
+					<Box
+						component={Grid}
+						container
+						item
+						order={{ sm: 1 }}
+						sx={{ flexGrow: 1, p: 1 }}
+					>
+						{children}
+					</Box>
+					<Grid
+						className="mobile-bottom-toolbar"
+						container
+						item
+						order={{ xs: 1 }}
+						direction="row"
+						justifyContent="center"
+						alignItems="center"
+						sx={{
+							display: { xs: 'flex', sm: 'none' },
+							bgcolor: 'rgb(46, 55, 67, .33)',
+						}}
+					>
+						<IconButton size="medium" aria-label="Mobile Menu Button" sx={{}}>
+							<CircleOutlinedIcon
+								fontSize="inherit"
+								sx={{
+									...mobileOnlyIcon,
+									color: 'white',
+								}}
+							/>
+						</IconButton>
+					</Grid>
 				</Box>
 			</Box>
 		</Box>
