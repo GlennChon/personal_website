@@ -51,16 +51,16 @@ const Monitor = ({ containerWidth, containerHeight, wallpaper, children }) => {
 
 	const glow = keyframes`
 		from, 0%, 100%, to {
-			box-shadow: 0 0 70px rgba(40, 62, 115, .4); 
+			box-shadow: 0 0 60px rgba(40, 62, 115, .4); 
 		}
 		20%, 80% { 
-			box-shadow: 0 0 80px rgba(40, 62, 115, .5);
+			box-shadow: 0 0 80px rgba(40, 62, 115, .6);
 		}
 		40%, 60% { 
-			box-shadow: 0 0 90px rgba(40, 62, 115, .6);
+			box-shadow: 0 0 100px rgba(40, 62, 115, .8);
 		}
 		50% {
-			box-shadow: 0 0 100px rgba(40, 62, 115, .8);
+			box-shadow: 0 0 120px rgba(40, 62, 115, .9);
 		}
 	
 	`
@@ -174,7 +174,7 @@ const Monitor = ({ containerWidth, containerHeight, wallpaper, children }) => {
 							sx={{
 								height: { xs: '2.5%', sm: '6%' },
 								mx: 'auto',
-								width: 'calc(100% - 6px)',
+								width: '100%',
 								bgcolor: { sm: 'rgb(46, 55, 67, .75)' },
 							}}
 						>
