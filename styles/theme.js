@@ -16,7 +16,7 @@ const getDesignTokens = (mode) => ({
 						dark: '#ba000d',
 						contrastText: '#000',
 					},
-					background: { default: 'rgb(11, 16, 21)', paper: 'rgb(11, 16, 21)' },
+					background: { default: '#0D0D0D', paper: '#0D0D0D' },
 			  }
 			: {
 					// palette values for dark mode
@@ -32,7 +32,7 @@ const getDesignTokens = (mode) => ({
 						dark: '#ba000d',
 						contrastText: '#000',
 					},
-					background: { default: 'rgb(11, 16, 21)', paper: 'rgb(11, 16, 21)' },
+					background: { default: '#0D0D0D', paper: '#0D0D0D' },
 			  }),
 	},
 })

@@ -1,11 +1,22 @@
 html,
 body {
+	height: 100%;
+	width: 100%;
 	padding: 0;
 	margin: 0;
-
 	font-family: 'Audiowide', cursive, -apple-system, BlinkMacSystemFont, Segoe UI,
 		Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
 		sans-serif;
+	overflow: hidden;
+}
+html {
+	display: table;
+	margin: auto;
+	overflow-y: auto;
+}
+body {
+	display: table-cell;
+	vertical-align: middle;
 }
 
 a {
