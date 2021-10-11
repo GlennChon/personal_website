@@ -33,7 +33,6 @@ const Desk = ({
 				justifyContent: 'center',
 				alignItems: 'center',
 				position: 'relative',
-				border: '1px solid red',
 			}}
 		>
 			<Box
