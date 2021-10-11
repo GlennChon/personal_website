@@ -1,10 +1,8 @@
-import Head from 'next/head'
-import Image from 'next/image'
 import { Box, Container, CssBaseline, Grid, Typography } from '@mui/material'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Monitor, Desk, Keyboard } from '../components'
 import useElementSize from '../utils/useElementSize'
-import MonitorBackgrounds from '../public/assets/gifs/monitor/index.jsx'
+import MonitorBackgrounds from '../../public/assets/gifs/monitor'
 
 export default function Home() {
 	const objectContainerRef = useRef(null)

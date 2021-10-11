@@ -14,12 +14,14 @@ const Key = ({
 	char = '',
 	size = 1,
 	width,
+	pressed = false,
 	blank = false,
 	variant = 'main',
 }: {
 	char: string
 	size: number
 	width?: number
+	pressed?: boolean
 	blank?: boolean
 	variant?: string
 }) => {
@@ -44,11 +46,16 @@ const Key = ({
 	const [keyHeight, setKeyHeight] = useState<number>(0)
 	const [keyDepth, setKeyDepth] = useState<number>(0)
 
+	const [pressedDepth, setPressedDepth] = useState<number>(0)
+	const [pressedHeight, setPressedHeight] = useState<number>(0)
+
 	useEffect(() => {
 		const kWidth: number = width / 20
 		setKeyWidth(kWidth)
 		setKeyHeight(kWidth * 0.9)
 		setKeyDepth(kWidth * 0.5)
+		setPressedHeight(kWidth * 0.9 * 0.5)
+		setPressedDepth(kWidth * 0.5 * 0.5)
 	}, [width])
 
 	return (
@@ -70,59 +77,73 @@ const Key = ({
 				className="key-front"
 				component="div"
 				sx={{
-					height: `100%`,
+					//half height
+					height: pressed ? `${pressedHeight}px` : `100%`,
 					width: `100%`,
 					transform: `rotateX(-90deg) translateZ(calc(${keyHeight}px / 2))`,
 					bgcolor: yColor[`${variant}`],
 					position: 'absolute',
+					filter: pressed ? 'brightness(0.5)' : 'none',
 				}}
 			/>
 			<Box
 				className="key-back"
 				component="div"
 				sx={{
-					height: `100%`,
+					//half height
+					height: pressed ? `${pressedHeight}px` : `100%`,
 					width: `100%`,
-					transform: `rotateX(90deg) translateZ(calc(${keyHeight}px / 2))`,
+					transform: `rotateX(90deg) translateZ(calc(${
+						pressed ? pressedHeight : keyHeight
+					}px / 2))`,
 					bgcolor: yColor[`${variant}`],
 					position: 'absolute',
+					filter: pressed ? 'brightness(0.5)' : 'none',
 				}}
 			/>
 			<Box
 				className="key-right"
 				component="div"
 				sx={{
-					height: `100%`,
+					//half height
+					height: pressed ? `${pressedHeight}px` : `100%`,
 					width: `calc(100% / ${size})`,
 					transform: `rotateY(90deg) translateZ(calc((${keyWidth}px * ${size}) / 2))`,
 					background: xColor[`${variant}`],
 					position: 'absolute',
+					filter: pressed ? 'brightness(0.5)' : 'none',
 				}}
 			/>
 			<Box
 				className="key-left"
 				component="div"
 				sx={{
-					height: `100%`,
+					//half height
+					height: pressed ? `${pressedHeight}px` : `100%`,
 					width: `calc(100% / ${size})`,
 					transform: `rotateY(90deg) translateZ(calc((-${keyWidth}px * ${size}) / 2))`,
 					background: xColor[`${variant}`],
 					position: 'absolute',
+					filter: pressed ? 'brightness(0.5)' : 'none',
 				}}
 			/>
 			<Box
 				className="key-top"
 				component="div"
 				sx={{
+					//half transform key depth
 					height: `100%`,
 					width: `100%`,
-					transform: `rotateY(0deg) translateZ(${keyDepth}px)`,
+					transform: `rotateY(0deg) translateZ(${
+						pressed ? pressedDepth : keyDepth
+					}px)`,
 					bgcolor: zColor[`${variant}`].primary,
 					textAlign: 'center',
 					position: 'absolute',
 					backgroundImage: `radial-gradient(${
 						zColor[`${variant}`].primary
 					} 50%, ${zColor[`${variant}`].dark})`,
+					filter: pressed ? 'brightness(0.5)' : 'none',
 				}}
 			>
 				<Box

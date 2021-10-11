@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react'
 function useKeyPress(targetKey) {
 	// State for keeping track of whether key is pressed
-	const [keyPressed, setKeyPressed] = useState < boolean > false
+	const [keyPressed, setKeyPressed] = useState<boolean>(false)
 	// If pressed key is our target key then set to true
 	function downHandler({ key }) {
 		if (key === targetKey) {
@@ -25,4 +26,4 @@ function useKeyPress(targetKey) {
 	}, []) // Empty array ensures that effect is only run on mount and unmount
 	return keyPressed
 }
-export default useKeyPress
+export default { useKeyPress }

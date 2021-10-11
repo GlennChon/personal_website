@@ -2,16 +2,16 @@ import Head from 'next/head'
 import type { AppProps /*, AppContext */ } from 'next/app'
 import { createContext, useState, useMemo } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
-import { Box, Container, CssBaseline } from '@mui/material'
+import { CssBaseline } from '@mui/material'
 import { CacheProvider, EmotionCache } from '@emotion/react'
-import createEmotionCache from '../styles/createEmotionCache'
+import createEmotionCache from '../../styles/createEmotionCache'
 import {
 	createTheme,
 	responsiveFontSizes,
 	useTheme,
 } from '@mui/material/styles'
 import '/styles/globals.css'
-import { getDesignTokens } from '../styles/theme'
+import { getDesignTokens } from '../../styles/theme'
 import { ViewportProvider } from '../utils/ViewportProvider'
 
 interface MyAppProps extends AppProps {

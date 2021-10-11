@@ -7,13 +7,23 @@
 		"strict": false,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": true,
 		"esModuleInterop": true,
 		"module": "esnext",
 		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"jsx": "preserve"
+		"jsx": "preserve",
+		"baseUrl": "src/"
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "public/assets/gifs/monitor/index.jsx", "public/assets/gifs/special/index.jsx"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"public/assets/gifs/monitor/index.tsx",
+		"public/assets/gifs/special/index.tsx",
+		"src/**/*"
+, "styles"	],
 	"exclude": ["node_modules"]
 }
