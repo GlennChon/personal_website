@@ -19,7 +19,7 @@ interface MyAppProps extends AppProps {
 }
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache()
-
+//test
 function MyApp(props: MyAppProps) {
 	const { Component, emotionCache = clientSideEmotionCache, pageProps } = props
 	const ColorModeContext = createContext({ toggleColorMode: () => {} })
