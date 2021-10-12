@@ -29,7 +29,7 @@ export default function Home() {
 	const [containerXY, setContainerXY] = useState({ width: null, height: null })
 	const [cvClick, setCvClick] = React.useState(false)
 	const handleCvClick = () => setCvClick((prev) => !prev)
-
+	//test
 	// alternates switchWallpaper boolean every 2.5 minutes
 	useEffect(() => {
 		const interval = setInterval(() => {
