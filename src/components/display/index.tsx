@@ -79,7 +79,7 @@ const Display = ({ wallpaper, onMenuClick, children }) => {
 					}}
 				>
 					<Grid item>
-						<IconButton aria-label="Mobile Menu Button">
+						<IconButton aria-label="Mobile Menu Button" onClick={onMenuClick}>
 							<CircleOutlinedIcon
 								className="menu-button"
 								sx={{
