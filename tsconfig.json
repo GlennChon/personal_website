@@ -23,7 +23,10 @@
 		"**/*.tsx",
 		"public/assets/gifs/monitor/index.tsx",
 		"public/assets/gifs/special/index.tsx",
-		"src/**/*"
-, "styles"	],
+		"src/**/*",
+		"styles/**/*.tsx",
+		"styles/**/*.ts",
+		"styles"
+	],
 	"exclude": ["node_modules"]
 }
