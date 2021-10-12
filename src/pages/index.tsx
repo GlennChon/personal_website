@@ -1,13 +1,34 @@
-import { Box, Container, CssBaseline, Grid, Typography } from '@mui/material'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Monitor, Desk, Keyboard } from '../components'
-import useElementSize from '../utils/useElementSize'
+import {
+	Box,
+	Backdrop,
+	Button,
+	ButtonGroup,
+	buttonGroupClasses,
+	Container,
+	CssBaseline,
+	Fade,
+	Grid,
+	IconButton,
+	Link,
+	Modal,
+	Stack,
+	Typography,
+	SvgIcon,
+} from '@mui/material'
+import { PictureAsPdf } from '@mui/icons-material'
+import { Monitor, Desk, Display, Keyboard } from '../components'
 import MonitorBackgrounds from '../../public/assets/gifs/monitor'
+import useElementSize from '../utils/useElementSize'
+import { turnOn } from '../../styles/animations'
 
 export default function Home() {
 	const objectContainerRef = useRef(null)
 	const { width, height } = useElementSize(objectContainerRef)
 	const [switchWallpaper, setSwitchWallpaper] = useState<boolean>(false)
+	const [containerXY, setContainerXY] = useState({ width: null, height: null })
+	const [cvClick, setCvClick] = React.useState(false)
+	const handleCvClick = () => setCvClick((prev) => !prev)
 
 	// alternates switchWallpaper boolean every 2.5 minutes
 	useEffect(() => {
@@ -23,6 +44,10 @@ export default function Home() {
 			wallpapers[`${Math.floor(Math.random() * wallpapers.length)}`]
 		]
 	}, [switchWallpaper])
+
+	useEffect(() => {
+		setContainerXY({ width: width, height: height })
+	}, [width, height])
 
 	return (
 		<Box
@@ -46,26 +71,40 @@ export default function Home() {
 				item
 				sx={{
 					height: '100%',
+					animation: `${turnOn} 1s ease-in-out`,
 				}}
 			>
 				<Monitor
-					containerWidth={width}
-					containerHeight={height}
-					wallpaper={wallpaperSrc}
+					containerWidth={containerXY.width}
+					containerHeight={containerXY.height}
 				>
-					<Box
-						sx={{
-							m: 'auto',
-							backgroundColor: 'rgb(255, 255, 255, .7)',
-							p: 3,
-							borderRadius: 3,
-							border: '1px solid yellow',
-						}}
-					>
-						<Typography>Coming Soon...</Typography>
-					</Box>
+					<Display wallpaper={wallpaperSrc}>
+						<Stack
+							direction="column"
+							justifyContent="space-evenly"
+							alignItems="flex-start"
+							spacing={0}
+						>
+							<IconButton
+								size="small"
+								disableFocusRipple
+								onClick={handleCvClick}
+								sx={{
+									color: 'white',
+									border: 'none',
+									width: '50px',
+									height: '50px',
+									borderRadius: 3,
+									'&:hover': {
+										background: 'rgb(255, 255, 255, 0.3)',
+									},
+								}}
+							>
+								<PictureAsPdf />
+							</IconButton>
+						</Stack>
+					</Display>
 				</Monitor>
-
 				<Box
 					component="div"
 					sx={{
@@ -76,15 +115,64 @@ export default function Home() {
 						},
 					}}
 				>
-					<Desk containerWidth={width}>
-						<Keyboard containerWidth={width} />
+					<Desk containerWidth={containerXY.width}>
+						<Keyboard containerWidth={containerXY.width} />
 					</Desk>
 				</Box>
+				{/* modal */}
+				<Modal
+					aria-labelledby="transition-modal-title"
+					aria-describedby="transition-modal-description"
+					open={cvClick}
+					onClose={handleCvClick}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{
+						timeout: 500,
+					}}
+				>
+					<Fade in={cvClick}>
+						<Box
+							sx={{
+								position: 'absolute',
+								height: '80%',
+								top: '50%',
+								left: '50%',
+								transform: 'translate(-50%, -50%)',
+								width: 400,
+								bgcolor: 'background.paper',
+								border: '2px solid #000',
+								boxShadow: 24,
+								p: 4,
+								color: 'white',
+							}}
+						>
+							<Typography
+								id="transition-modal-title"
+								variant="h6"
+								component="h2"
+							>
+								Coming Soon
+							</Typography>
+							<Typography id="transition-modal-description" sx={{ mt: 2 }}>
+								Still spending nights working on this. In the mean time please
+								check out:
+							</Typography>
+							<br />
+							<br />
+							<Link href="https://www.linkedin.com/in/glenn-chon/">
+								LinkedIn
+							</Link>
+							<br />
+							<br />
+							<Link href="https://github.com/GlennChon">Github</Link>
+							<br />
+							<br />
+							<Link href="https://fetchwork.io">FetchWork</Link>
+						</Box>
+					</Fade>
+				</Modal>
 			</Box>
 		</Box>
-
-		// Keyboard: WhiteFox
-		// Switches: Cherry MX Clear
-		// Keycaps: Jessica GMK Plum
 	)
 }
