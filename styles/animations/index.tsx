@@ -16,7 +16,7 @@ from, 0%, 100%, to {
 
 `
 
-const turnOn = keyframes`
+const powerOn = keyframes`
 	0% {
 		background: #fff !important;
 		animation-timing-function: ease-in;
@@ -24,7 +24,7 @@ const turnOn = keyframes`
 		-webkit-filter: brightness(50);
 		filter: brightness(50);
 	}
-	60% {
+	70% {
 		background: #fff !important;
 		transform: scale(1.3, 0.001) translate3d(0, 0, 0);
 		-webkit-filter: brightness(10);
@@ -38,4 +38,4 @@ const turnOn = keyframes`
 		opacity: 1;
 	}
 `
-export { glow, turnOn }
+export { glow, powerOn }

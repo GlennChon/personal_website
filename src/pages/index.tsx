@@ -20,7 +20,7 @@ import { PictureAsPdf } from '@mui/icons-material'
 import { Monitor, Desk, Display, Keyboard } from '../components'
 import MonitorBackgrounds from '../../public/assets/gifs/monitor'
 import useElementSize from '../utils/useElementSize'
-import { turnOn } from '../../styles/animations'
+import { powerOn } from '../../styles/animations'
 
 export default function Home() {
 	const objectContainerRef = useRef(null)
@@ -71,7 +71,7 @@ export default function Home() {
 				item
 				sx={{
 					height: '100%',
-					animation: `${turnOn} 1s ease-in-out`,
+					animation: `${powerOn} 1s ease-in-out`,
 				}}
 			>
 				<Monitor
