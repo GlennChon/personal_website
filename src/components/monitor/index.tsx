@@ -11,7 +11,7 @@ const Monitor = ({ containerWidth, containerHeight, children }) => {
 		setScreenWidth(containerWidth * 0.8)
 		setScreenHeight(screenWidth * (9 / 21))
 
-		const maxMobileHeight = screenWidth * (414 / 896)
+		const maxMobileHeight = screenWidth * (4 / 9)
 		const mobileHeight: number =
 			containerHeight < maxMobileHeight ? containerHeight : maxMobileHeight
 		setMobileScreenHeight(mobileHeight)
