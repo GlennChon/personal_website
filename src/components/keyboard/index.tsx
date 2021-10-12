@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Tooltip } from '@mui/material'
 import { KeyRow, Key } from './key'
 import { Board } from './board'
 import { useEffect, useState } from 'react'
@@ -71,178 +71,188 @@ const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
 	useEventListener('keyup', onKeyUp)
 
 	return (
-		<Box
-			className="keyboard-container"
-			component="div"
-			sx={{
-				m: '0 auto',
-				display: 'flex',
-				height: `${boardHeight}px`,
-				width: `${boardWidth}px`,
-				//flex
-				justifyContent: 'center',
-				alignItems: 'center',
-				position: 'relative',
-			}}
+		<Tooltip
+			placement="top"
+			arrow
+			title={
+				<div style={{ whiteSpace: 'pre-line' }}>{`Keyboard: WhiteFox\n
+			Switches: Cherry MX Clear\n
+			Keycaps: Jessica GMK Plum`}</div>
+			}
 		>
-			<Board width={boardWidth} height={boardHeight} depth={boardDepth}>
-				{/* row 1 */}
-				<KeyRow width={boardWidth}>
-					<Key
-						char="Esc"
-						pressed={isKeyPressed('escape')}
-						size={1}
-						variant="special"
-						width={boardWidth}
-					/>
-					{defaultKeys(14, firstSet)}
-					<Key char="Ó" size={1} variant="accent" width={boardWidth} />
-				</KeyRow>
-				{/* row 2 */}
-				<KeyRow width={boardWidth}>
-					<Key
-						char="⭾ Tab"
-						pressed={isKeyPressed('tab')}
-						size={1.5}
-						variant="accent"
-						width={boardWidth}
-					/>
-					{defaultKeys(12, secondSet)}
-					<Key
-						char="←"
-						pressed={isKeyPressed('backspace')}
-						size={1.5}
-						variant="accent"
-						width={boardWidth}
-					/>
-					<Key
-						char="Delete"
-						pressed={isKeyPressed('delete')}
-						size={1}
-						variant="accent"
-						width={boardWidth}
-					/>
-				</KeyRow>
-				{/* row 3 */}
-				<KeyRow width={boardWidth}>
-					<Key
-						char="Caps Lock"
-						pressed={isKeyPressed('capslock')}
-						size={2}
-						variant="accent"
-						width={boardWidth}
-					/>
-					{defaultKeys(11, thirdSet)}
-					<Key
-						char="↵"
-						pressed={isKeyPressed('enter')}
-						size={2}
-						variant="accent"
-						width={boardWidth}
-					/>
-					<Key
-						char="PgUp"
-						pressed={isKeyPressed('pageup')}
-						size={1}
-						variant="accent"
-						width={boardWidth}
-					/>
-				</KeyRow>
-				{/* row 4 */}
-				<KeyRow width={boardWidth}>
-					<Key
-						char="⇧ Shift"
-						pressed={isKeyPressed('shiftleft')}
-						size={2.5}
-						variant="accent"
-						width={boardWidth}
-					/>
-					{defaultKeys(10, fourthSet)}
-					<Key
-						char="⇧ Shift"
-						pressed={isKeyPressed('shiftright')}
-						size={1.5}
-						variant="accent"
-						width={boardWidth}
-					/>
-					<Key
-						char="↑"
-						pressed={isKeyPressed('arrowup')}
-						size={1}
-						variant="special"
-						width={boardWidth}
-					/>
-					<Key
-						char="PgDn"
-						pressed={isKeyPressed('pagedown')}
-						size={1}
-						variant="accent"
-						width={boardWidth}
-					/>
-				</KeyRow>
-				{/* row 5 */}
-				<KeyRow width={boardWidth}>
-					<Key
-						char="Control"
-						pressed={isKeyPressed('controlleft')}
-						size={1.3}
-						variant="accent"
-						width={boardWidth}
-					/>
-					<Key
-						char="❖"
-						pressed={isKeyPressed('os')}
-						size={1.3}
-						variant="accent"
-						width={boardWidth}
-					/>
-					<Key
-						char="Alt"
-						pressed={isKeyPressed('alt')}
-						size={1.3}
-						variant="accent"
-						width={boardWidth}
-					/>
-					<Key
-						char=" "
-						pressed={isKeyPressed(' ')}
-						data-key="space"
-						size={6.5}
-						width={boardWidth}
-					/>
-					<Key char="Fn" size={1.3} variant="accent" width={boardWidth} />
-					<Key
-						char="Control"
-						pressed={isKeyPressed('controlright')}
-						size={1.3}
-						variant="accent"
-						width={boardWidth}
-					/>
-					<Key char="" size={0.3} blank={true} width={boardWidth} />
-					<Key
-						char="←"
-						pressed={isKeyPressed('arrowleft')}
-						size={1}
-						variant="special"
-						width={boardWidth}
-					/>
-					<Key
-						char="↓"
-						pressed={isKeyPressed('arrowdown')}
-						size={1}
-						variant="special"
-						width={boardWidth}
-					/>
-					<Key
-						char="→"
-						pressed={isKeyPressed('arrowright')}
-						size={1}
-						variant="special"
-						width={boardWidth}
-					/>
-				</KeyRow>
-			</Board>
-		</Box>
+			<Box
+				className="keyboard-container"
+				component="div"
+				sx={{
+					m: '0 auto',
+					display: 'flex',
+					height: `${boardHeight}px`,
+					width: `${boardWidth}px`,
+					//flex
+					justifyContent: 'center',
+					alignItems: 'center',
+					position: 'relative',
+				}}
+			>
+				<Board width={boardWidth} height={boardHeight} depth={boardDepth}>
+					{/* row 1 */}
+					<KeyRow width={boardWidth}>
+						<Key
+							char="Esc"
+							pressed={isKeyPressed('escape')}
+							size={1}
+							variant="special"
+							width={boardWidth}
+						/>
+						{defaultKeys(14, firstSet)}
+						<Key char="Ó" size={1} variant="accent" width={boardWidth} />
+					</KeyRow>
+					{/* row 2 */}
+					<KeyRow width={boardWidth}>
+						<Key
+							char="⭾ Tab"
+							pressed={isKeyPressed('tab')}
+							size={1.5}
+							variant="accent"
+							width={boardWidth}
+						/>
+						{defaultKeys(12, secondSet)}
+						<Key
+							char="←"
+							pressed={isKeyPressed('backspace')}
+							size={1.5}
+							variant="accent"
+							width={boardWidth}
+						/>
+						<Key
+							char="Delete"
+							pressed={isKeyPressed('delete')}
+							size={1}
+							variant="accent"
+							width={boardWidth}
+						/>
+					</KeyRow>
+					{/* row 3 */}
+					<KeyRow width={boardWidth}>
+						<Key
+							char="Caps Lock"
+							pressed={isKeyPressed('capslock')}
+							size={2}
+							variant="accent"
+							width={boardWidth}
+						/>
+						{defaultKeys(11, thirdSet)}
+						<Key
+							char="↵"
+							pressed={isKeyPressed('enter')}
+							size={2}
+							variant="accent"
+							width={boardWidth}
+						/>
+						<Key
+							char="PgUp"
+							pressed={isKeyPressed('pageup')}
+							size={1}
+							variant="accent"
+							width={boardWidth}
+						/>
+					</KeyRow>
+					{/* row 4 */}
+					<KeyRow width={boardWidth}>
+						<Key
+							char="⇧ Shift"
+							pressed={isKeyPressed('shiftleft')}
+							size={2.5}
+							variant="accent"
+							width={boardWidth}
+						/>
+						{defaultKeys(10, fourthSet)}
+						<Key
+							char="⇧ Shift"
+							pressed={isKeyPressed('shiftright')}
+							size={1.5}
+							variant="accent"
+							width={boardWidth}
+						/>
+						<Key
+							char="↑"
+							pressed={isKeyPressed('arrowup')}
+							size={1}
+							variant="special"
+							width={boardWidth}
+						/>
+						<Key
+							char="PgDn"
+							pressed={isKeyPressed('pagedown')}
+							size={1}
+							variant="accent"
+							width={boardWidth}
+						/>
+					</KeyRow>
+					{/* row 5 */}
+					<KeyRow width={boardWidth}>
+						<Key
+							char="Control"
+							pressed={isKeyPressed('controlleft')}
+							size={1.3}
+							variant="accent"
+							width={boardWidth}
+						/>
+						<Key
+							char="❖"
+							pressed={isKeyPressed('os')}
+							size={1.3}
+							variant="accent"
+							width={boardWidth}
+						/>
+						<Key
+							char="Alt"
+							pressed={isKeyPressed('alt')}
+							size={1.3}
+							variant="accent"
+							width={boardWidth}
+						/>
+						<Key
+							char=" "
+							pressed={isKeyPressed(' ')}
+							data-key="space"
+							size={6.5}
+							width={boardWidth}
+						/>
+						<Key char="Fn" size={1.3} variant="accent" width={boardWidth} />
+						<Key
+							char="Control"
+							pressed={isKeyPressed('controlright')}
+							size={1.3}
+							variant="accent"
+							width={boardWidth}
+						/>
+						<Key char="" size={0.3} blank={true} width={boardWidth} />
+						<Key
+							char="←"
+							pressed={isKeyPressed('arrowleft')}
+							size={1}
+							variant="special"
+							width={boardWidth}
+						/>
+						<Key
+							char="↓"
+							pressed={isKeyPressed('arrowdown')}
+							size={1}
+							variant="special"
+							width={boardWidth}
+						/>
+						<Key
+							char="→"
+							pressed={isKeyPressed('arrowright')}
+							size={1}
+							variant="special"
+							width={boardWidth}
+						/>
+					</KeyRow>
+				</Board>
+			</Box>
+		</Tooltip>
 	)
 }
 
