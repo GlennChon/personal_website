@@ -72,7 +72,7 @@ const Monitor = ({ containerWidth, containerHeight, children }) => {
 					sx={{
 						position: 'absolute',
 						m: '0 auto',
-						top: 2.5,
+						top: 4.5,
 						right: 0,
 						left: 0,
 						height: '1px',
