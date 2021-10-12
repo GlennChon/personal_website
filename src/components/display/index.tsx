@@ -19,7 +19,7 @@ const desktopOnlyIcon = {
 	display: { xs: 'none', sm: 'flex' },
 }
 
-const Display = ({ wallpaper, children }) => {
+const Display = ({ wallpaper, onMenuClick, children }) => {
 	const [time, setTime] = useState<string>()
 	useEffect(() => {
 		let interval = setInterval(() => {
@@ -156,7 +156,12 @@ const Display = ({ wallpaper, children }) => {
 					bgcolor: 'rgb(46, 55, 67, .33)',
 				}}
 			>
-				<IconButton size="medium" aria-label="Mobile Menu Button" sx={{}}>
+				<IconButton
+					size="medium"
+					aria-label="Mobile Menu Button"
+					sx={{}}
+					onClick={onMenuClick}
+				>
 					<CircleOutlinedIcon
 						fontSize="inherit"
 						sx={{

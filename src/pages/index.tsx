@@ -78,7 +78,7 @@ export default function Home() {
 					containerWidth={containerXY.width}
 					containerHeight={containerXY.height}
 				>
-					<Display wallpaper={wallpaperSrc}>
+					<Display wallpaper={wallpaperSrc} onMenuClick={handleCvClick}>
 						<Stack
 							direction="column"
 							justifyContent="space-evenly"
