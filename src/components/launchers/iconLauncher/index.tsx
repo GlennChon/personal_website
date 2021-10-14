@@ -22,7 +22,7 @@ const IconLauncher = ({ icon, label, onClick, sx }) => {
 			}}
 		>
 			{createElement(icon)}
-			<Typography sx={{ fontSize: { sm: '.45em', md: '.5em' } }}>
+			<Typography sx={{ fontSize: { xs: '.6em', sm: '.4em', md: '.5em' } }}>
 				{label}
 			</Typography>
 		</IconButton>
