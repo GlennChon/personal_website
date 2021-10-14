@@ -1,10 +1,11 @@
 import { createTheme } from '@mui/material/styles'
+
 const theme = createTheme({
 	palette: {
 		primary: {
 			light: '#757ce8',
 			main: '#3f50b5',
-			dark: '#002884',
+			dark: '#001037',
 			contrastText: '#fff',
 		},
 		secondary: {
@@ -13,11 +14,11 @@ const theme = createTheme({
 			dark: '#ba000d',
 			contrastText: '#000',
 		},
-		background: { default: '#0D0D0D', paper: '#0D0D0D' },
+		background: { default: '#000', paper: '#000' },
+		// background: { default: '#0D0D0D', paper: '#0D0D0D' },
 	},
 	typography: {
 		fontFamily: ['"Audiowide"', 'Lato'].join(','),
-		// overline: { textTransform: 'uppercase' },
 	},
 })
 
