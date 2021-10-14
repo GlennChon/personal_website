@@ -1,20 +1,21 @@
 import React, { createElement } from 'react'
 import { IconButton, Typography } from '@mui/material'
 
-const IconLauncher = ({ icon, label, onClick, sx }) => {
+const LauncherIcon = ({ icon, label, color = 'white', onClick, sx }) => {
 	return (
 		<IconButton
 			size="small"
 			disableFocusRipple
 			onClick={onClick}
 			sx={{
-				color: 'white',
+				color: color,
 				border: 'none',
-				width: '50px',
-				height: '50px',
+				width: '65px',
+				height: '65px',
 				display: 'flex',
 				flexDirection: 'column',
 				m: 1,
+				background: 'rgb(13,13,13, 0.5)',
 				'&:hover': {
 					background: 'rgb(255, 255, 255, 0.3)',
 				},
@@ -22,11 +23,11 @@ const IconLauncher = ({ icon, label, onClick, sx }) => {
 			}}
 		>
 			{createElement(icon)}
-			<Typography sx={{ fontSize: { xs: '.6em', sm: '.4em', md: '.5em' } }}>
+			<Typography sx={{ fontSize: { xs: '.5em', sm: '.4em', md: '.5em' } }}>
 				{label}
 			</Typography>
 		</IconButton>
 	)
 }
 
-export default IconLauncher
+export default LauncherIcon
