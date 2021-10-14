@@ -54,7 +54,7 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 			}}
 		>
 			<Box
-				className="toolbar"
+				className="taskbar"
 				component={Grid}
 				container
 				item
@@ -100,6 +100,7 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 					</Grid>
 				</Box>
 				<Box
+					className="taskbar-icons-container"
 					component={Grid}
 					container
 					item
