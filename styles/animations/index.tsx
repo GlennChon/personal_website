@@ -1,19 +1,12 @@
 import { keyframes } from '@emotion/react'
 
 const glow = keyframes`
-from, 0%, 100%, to {
-	box-shadow: 0 0 60px rgba(40, 62, 115, .4); 
-}
-20%, 80% { 
-	box-shadow: 0 0 80px rgba(40, 62, 115, .6);
-}
-40%, 60% { 
-	box-shadow: 0 0 100px rgba(40, 62, 115, .8);
-}
-50% {
-	box-shadow: 0 0 120px rgba(40, 62, 115, .9);
-}
-
+	from, 0% {
+		box-shadow: 0 0 100px 20px rgba(40, 62, 115, .4); 
+	}
+	100%, to {
+		box-shadow: 0 0 140px 20px rgba(40, 62, 115, .8);
+	}
 `
 
 const powerOn = keyframes`
@@ -39,25 +32,100 @@ const powerOn = keyframes`
 	}
 `
 
-const bounce = keyframes`
-	0%, {transform: translate3d(0,-100%,0);}
-	20%, 53%, 80% {
-		transform: translate3d(0,0,0);
-		display: block;
-	}
-	40%, 43% {
-		transform: translate3d(0, -30px, 0);
-	}
-	70% {
-		transform: translate3d(0, -15px, 0);
-	}
-	90% {
-		transform: translate3d(0,-4px,0);
-	}
-`
 const fadeIn = keyframes`
 	from { opacity: 0; }
 	to   { opacity: 1; }
 `
+const signColorOn = '#bc13fe'
+const signColorOff = '#001037'
 
-export { bounce, fadeIn, glow, powerOn }
+const signFlickerOn = keyframes`
+	from, 0%, 19%, 21%, 54%, 56%, 59%, 61%, 79%, 81%, 89%, 91%, 99%{
+		color: ${signColorOff};      
+		text-shadow: none;
+		box-shadow: none;
+
+		border: .4rem double ${signColorOff};
+	}
+	20%, 55%, 60%,   {
+		border: .4rem double #fff;
+		box-shadow: 0 0 .2rem #fff,
+		0 0 .2rem #fff,
+		0 0 2rem ${signColorOn},
+		0 0 0.8rem ${signColorOn},
+		0 0 2.8rem ${signColorOn},
+		inset 0 0 1.3rem ${signColorOn};
+		
+	}
+	80% { 
+		color: #fff;
+		text-shadow:
+			0 0 4px #fff,
+			0 0 11px #fff,
+			0 0 19px #fff,
+			0 0 40px ${signColorOn},
+			0 0 80px ${signColorOn},
+			0 0 90px ${signColorOn},
+			0 0 100px ${signColorOn},
+			0 0 150px ${signColorOn};
+
+		box-shadow: none;
+	}
+	90%, 100%, to { 
+		color: #fff;
+		text-shadow:
+			0 0 4px #fff,
+			0 0 11px #fff,
+			0 0 19px #fff,
+			0 0 40px ${signColorOn},
+			0 0 80px ${signColorOn},
+			0 0 90px ${signColorOn},
+			0 0 100px ${signColorOn},
+			0 0 150px ${signColorOn};
+
+		box-shadow: 0 0 .2rem #fff,
+		0 0 .2rem #fff,
+		0 0 2rem ${signColorOn},
+		0 0 0.8rem ${signColorOn},
+		0 0 2.8rem ${signColorOn},
+		inset 0 0 1.3rem ${signColorOn};
+		border: .4rem double #fff;
+	}
+
+`
+const signFlicker = keyframes`
+	from, 0%, 19.8%, 20.2%, 23.8%, 24.2%, 54.8%, 55.2%, 100%, to {
+		color: #fff;
+		text-shadow:
+			0 0 4px #fff,
+			0 0 11px #fff,
+			0 0 19px #fff,
+			0 0 40px ${signColorOn},
+			0 0 80px ${signColorOn},
+			0 0 90px ${signColorOn},
+			0 0 100px ${signColorOn},
+			0 0 150px ${signColorOn};
+		
+		box-shadow: 0 0 .2rem #fff,
+		0 0 .2rem #fff,
+		0 0 2rem ${signColorOn},
+		0 0 0.8rem ${signColorOn},
+		0 0 2.8rem ${signColorOn},
+		inset 0 0 1.3rem ${signColorOn};
+		border: .4rem double #fff;
+	}
+	20%, 24%, 55% { 
+		color: ${signColorOff};
+		text-shadow: none;
+
+		box-shadow: 0 0 .2rem #fff,
+		0 0 .2rem #fff,
+		0 0 2rem ${signColorOn},
+		0 0 0.8rem ${signColorOn},
+		0 0 2.8rem ${signColorOn},
+		inset 0 0 1.3rem ${signColorOn};  
+		border: .4rem double ${signColorOn};
+	}
+`
+
+export { fadeIn, glow, powerOn, signFlicker, signFlickerOn }

@@ -4,7 +4,7 @@ import { GitHub, Description, LinkedIn, Pets, Email } from '@mui/icons-material'
 import { Monitor, Desk, Display, Keyboard, Launchers } from '../components'
 import MonitorBackgrounds from '../../public/assets/gifs/monitor'
 import useElementSize from '../utils/useElementSize'
-import { powerOn } from '../../styles/animations'
+import { powerOn, signFlicker, signFlickerOn } from '../../styles/animations'
 
 export default function Home() {
 	const objectContainerRef = useRef(null)
@@ -112,6 +112,7 @@ export default function Home() {
 			}}
 		>
 			{/* <h1>Glenn Chon</h1> */}
+
 			<Box
 				className="object-container"
 				ref={objectContainerRef}
@@ -120,9 +121,37 @@ export default function Home() {
 				item
 				sx={{
 					height: '100%',
+					width: '100%',
 					animation: `${powerOn} 1s ease-in-out`,
 				}}
 			>
+				<Grid
+					item
+					sx={{
+						// display: { xs: 'none', sm: 'flex' },
+						position: 'relative',
+						mb: { xs: 3, sm: 6 },
+					}}
+				>
+					<Typography
+						sx={{
+							m: 'auto',
+							width: { xs: '250px', md: '300px', lg: '350px' },
+							fontFamily: "'Neon Tubes 2'",
+							textAlign: 'center',
+							p: 1,
+							color: 'primary.dark',
+							fontSize: { xs: '2rem', md: '2.5rem', lg: '3rem' },
+							animation: `${signFlickerOn} 5s normal 2s 1, ${signFlicker} 8s infinite 7s alternate`,
+							border: '.4rem double primary.dark',
+							borderRadius: 3,
+							textShadow: 'none',
+							boxShadow: 'none',
+						}}
+					>
+						Glenn Chon
+					</Typography>
+				</Grid>
 				<Monitor
 					sx={{
 						height: { xs: monitorXY.mHeight, sm: monitorXY.height },
@@ -135,6 +164,7 @@ export default function Home() {
 					</Display>
 				</Monitor>
 				<Box
+					className="desk-setup-container"
 					component="div"
 					sx={{
 						position: 'relative',
@@ -197,7 +227,8 @@ export default function Home() {
 							</Typography>
 							<Typography id="transition-modal-description" sx={{ mt: 2 }}>
 								Still spending nights working on this. In the mean time please
-								check out the first four launcher icons
+								check out the first four launcher icons or try typing on your
+								keyboard.
 							</Typography>
 						</Box>
 					</Fade>
