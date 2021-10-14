@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Grid, IconButton, Stack, Typography } from '@mui/material'
 import {
 	Battery90,
+	CircleOutlined,
 	FiveG,
 	SignalCellularAlt,
 	VolumeDown,
 	Wifi,
 } from '@mui/icons-material'
-import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined'
+import { Box, Grid, IconButton, Stack } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { fadeIn } from '../../../styles/animations'
 
 const toolbarIcon = {
 	fontSize: '100%',
@@ -19,7 +20,7 @@ const desktopOnlyIcon = {
 	display: { xs: 'none', sm: 'flex' },
 }
 
-const Display = ({ wallpaper, onMenuClick, children }) => {
+const Display = ({ wallpaper, handleMenuClick, children }) => {
 	const [time, setTime] = useState<string>()
 	useEffect(() => {
 		let interval = setInterval(() => {
@@ -40,12 +41,16 @@ const Display = ({ wallpaper, onMenuClick, children }) => {
 			container
 			item
 			direction="column"
-			justifyContent={{ xs: 'space-between', sm: 'flex-end' }}
+			justifyContent={{ xs: 'space-between', sm: 'flex-start' }}
+			alignItems="center"
 			sx={{
 				height: '100%',
 				width: '100%',
 				borderRadius: 1,
-				background: `url(${wallpaper}) no-repeat 50% center / cover`,
+				background: wallpaper
+					? `url(${wallpaper}) no-repeat 50% center / cover`
+					: 'black',
+				animation: `${fadeIn} 1s ease`,
 			}}
 		>
 			<Box
@@ -78,15 +83,17 @@ const Display = ({ wallpaper, onMenuClick, children }) => {
 						justifySelf: 'center',
 					}}
 				>
-					<Grid item>
-						<IconButton aria-label="Mobile Menu Button" onClick={onMenuClick}>
-							<CircleOutlinedIcon
+					<Grid item sx={{ position: 'relative', right: -13 }}>
+						<IconButton
+							aria-label="Mobile Menu Button"
+							size="small"
+							onClick={handleMenuClick}
+						>
+							<CircleOutlined
 								className="menu-button"
 								sx={{
-									position: 'absolute',
-									right: -8,
 									color: 'white',
-									fontSize: '60%',
+									// fontSize: '60%',
 								}}
 							/>
 						</IconButton>
@@ -139,8 +146,9 @@ const Display = ({ wallpaper, onMenuClick, children }) => {
 				container
 				item
 				order={{ sm: 1 }}
-				sx={{ flexGrow: 1, p: 1 }}
+				sx={{ height: '80%', flexGrow: 1 }}
 			>
+				{/* add react-draggable  */}
 				{children}
 			</Box>
 			<Grid
@@ -157,13 +165,11 @@ const Display = ({ wallpaper, onMenuClick, children }) => {
 				}}
 			>
 				<IconButton
-					size="medium"
+					size="small"
 					aria-label="Mobile Menu Button"
-					sx={{}}
-					onClick={onMenuClick}
+					onClick={handleMenuClick}
 				>
-					<CircleOutlinedIcon
-						fontSize="inherit"
+					<CircleOutlined
 						sx={{
 							...mobileOnlyIcon,
 							color: 'white',
