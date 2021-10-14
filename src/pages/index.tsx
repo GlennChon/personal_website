@@ -1,35 +1,67 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import {
-	Box,
-	Backdrop,
-	Button,
-	ButtonGroup,
-	buttonGroupClasses,
-	Container,
-	CssBaseline,
-	Fade,
-	Grid,
-	IconButton,
-	Link,
-	Modal,
-	Stack,
-	Typography,
-	SvgIcon,
-} from '@mui/material'
-import { PictureAsPdf } from '@mui/icons-material'
-import { Monitor, Desk, Display, Keyboard } from '../components'
+import { Box, Backdrop, Fade, Grid, Modal, Typography } from '@mui/material'
+import { GitHub, Description, LinkedIn, Pets, Email } from '@mui/icons-material'
+import { Monitor, Desk, Display, Keyboard, Launchers } from '../components'
 import MonitorBackgrounds from '../../public/assets/gifs/monitor'
 import useElementSize from '../utils/useElementSize'
 import { powerOn } from '../../styles/animations'
 
 export default function Home() {
 	const objectContainerRef = useRef(null)
-	const { width, height } = useElementSize(objectContainerRef)
+	const { width } = useElementSize(objectContainerRef)
 	const [switchWallpaper, setSwitchWallpaper] = useState<boolean>(false)
-	const [containerXY, setContainerXY] = useState({ width: null, height: null })
-	const [cvClick, setCvClick] = React.useState(false)
+	const [monitorXY, setMonitorXY] = useState({
+		width: null,
+		height: null,
+		mHeight: null,
+	})
+	const [deskXYZ, setDeskXYZ] = useState({
+		width: null,
+		height: null,
+		depth: null,
+	})
+	const [boardXYZ, setBoardXYZ] = useState({
+		width: null,
+		height: null,
+		depth: null,
+	})
+	const [cvClick, setCvClick] = useState(false)
+
 	const handleCvClick = () => setCvClick((prev) => !prev)
-	//test
+	const openUrlClick = (url) => window.open(url, '_blank')
+
+	const launchers = [
+		{
+			label: 'GitHub',
+			icon: GitHub,
+			onClick: () => openUrlClick('https://www.github.com/glennchon'),
+		},
+		{
+			label: 'LinkedIn',
+			icon: LinkedIn,
+			onClick: () => openUrlClick('https://www.linkedin.com/in/glenn-chon'),
+		},
+		{
+			label: 'FetchWork',
+			icon: Pets,
+			onClick: () => openUrlClick('https://www.fetchwork.io'),
+		},
+		{
+			label: 'Résumé',
+			icon: Description,
+			onClick: () =>
+				openUrlClick('https://glennchon.com/assets/docs/Glenn_Chon_Resume.pdf'),
+		},
+		{
+			/*Send Email*/
+			//opens faux window with input and send button
+			label: 'Send Message',
+			icon: Email,
+			onClick: handleCvClick,
+			//() => openUrlClick('https://www.glennchon.com/'),
+		},
+	]
+
 	// alternates switchWallpaper boolean every 2.5 minutes
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -46,8 +78,25 @@ export default function Home() {
 	}, [switchWallpaper])
 
 	useEffect(() => {
-		setContainerXY({ width: width, height: height })
-	}, [width, height])
+		const baseWidth = width * 0.8
+		const boardWidth = baseWidth * (1 / 3)
+		setMonitorXY({
+			width: baseWidth,
+			height: baseWidth * (9 / 21),
+			mHeight: baseWidth * (9 / 5),
+		})
+		setDeskXYZ({
+			width: baseWidth,
+			height: baseWidth * (1 / 3),
+			depth: (baseWidth * (1 / 3)) / 20,
+		})
+
+		setBoardXYZ({
+			width: boardWidth,
+			height: boardWidth * (4.375 / 12.5),
+			depth: boardWidth * (0.575 / 12.5),
+		})
+	}, [width])
 
 	return (
 		<Box
@@ -75,34 +124,14 @@ export default function Home() {
 				}}
 			>
 				<Monitor
-					containerWidth={containerXY.width}
-					containerHeight={containerXY.height}
+					sx={{
+						height: { xs: monitorXY.mHeight, sm: monitorXY.height },
+						width: monitorXY.width,
+						m: 'auto',
+					}}
 				>
-					<Display wallpaper={wallpaperSrc} onMenuClick={handleCvClick}>
-						<Stack
-							direction="column"
-							justifyContent="space-evenly"
-							alignItems="flex-start"
-							spacing={0}
-						>
-							<IconButton
-								size="small"
-								disableFocusRipple
-								onClick={handleCvClick}
-								sx={{
-									color: 'white',
-									border: 'none',
-									width: '50px',
-									height: '50px',
-									borderRadius: 3,
-									'&:hover': {
-										background: 'rgb(255, 255, 255, 0.3)',
-									},
-								}}
-							>
-								<PictureAsPdf />
-							</IconButton>
-						</Stack>
+					<Display handleMenuClick={handleCvClick} wallpaper={wallpaperSrc}>
+						<Launchers itemArr={launchers} />
 					</Display>
 				</Monitor>
 				<Box
@@ -115,11 +144,23 @@ export default function Home() {
 						},
 					}}
 				>
-					<Desk containerWidth={containerXY.width}>
-						<Keyboard containerWidth={containerXY.width} />
+					<Desk
+						xyz={{
+							height: deskXYZ.height,
+							width: deskXYZ.width,
+							depth: deskXYZ.depth,
+						}}
+					>
+						<Keyboard
+							xyz={{
+								height: boardXYZ.height,
+								width: boardXYZ.width,
+								depth: boardXYZ.depth,
+							}}
+						/>
 					</Desk>
 				</Box>
-				{/* modal */}
+				{/* tmp modal */}
 				<Modal
 					aria-labelledby="transition-modal-title"
 					aria-describedby="transition-modal-description"
@@ -135,7 +176,7 @@ export default function Home() {
 						<Box
 							sx={{
 								position: 'absolute',
-								height: '80%',
+								height: 'auto',
 								top: '50%',
 								left: '50%',
 								transform: 'translate(-50%, -50%)',
@@ -156,19 +197,8 @@ export default function Home() {
 							</Typography>
 							<Typography id="transition-modal-description" sx={{ mt: 2 }}>
 								Still spending nights working on this. In the mean time please
-								check out:
+								check out the first four launcher icons
 							</Typography>
-							<br />
-							<br />
-							<Link href="https://www.linkedin.com/in/glenn-chon/">
-								LinkedIn
-							</Link>
-							<br />
-							<br />
-							<Link href="https://github.com/GlennChon">Github</Link>
-							<br />
-							<br />
-							<Link href="https://fetchwork.io">FetchWork</Link>
 						</Box>
 					</Fade>
 				</Modal>
