@@ -1,14 +1,13 @@
 import React from 'react'
 import { Box } from '@mui/material'
-
-import IconLauncher from './iconLauncher'
+import LauncherIcon from './launcherIcon'
 
 const Launchers = ({ itemArr = [] }) => {
 	const clickableIcons = () => {
 		let iconLaunchers = []
 		itemArr.map((item, i) =>
 			iconLaunchers.push(
-				<IconLauncher
+				<LauncherIcon
 					key={i}
 					icon={item.icon}
 					label={item.label}
