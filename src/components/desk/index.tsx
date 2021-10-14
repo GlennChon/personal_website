@@ -1,25 +1,14 @@
 import { Box } from '@mui/material'
-import React, { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode } from 'react'
 
 const Desk = ({
-	containerWidth,
+	xyz,
 	children,
 }: {
-	containerWidth: number
+	xyz: { height: number; width: number; depth: number }
 	children: ReactNode
 }) => {
-	const [deskWidth, setDeskWidth] = useState<number>(0)
-	const [deskHeight, setDeskHeight] = useState<number>(0)
-	const [deskDepth, setDeskDepth] = useState<number>(0)
-
-	useEffect(() => {
-		const maxContainerWidth: number = 900
-		const calculated: number =
-			containerWidth < maxContainerWidth ? containerWidth : maxContainerWidth
-		setDeskWidth(containerWidth * 0.85)
-		setDeskHeight(deskWidth * (1 / 3))
-		setDeskDepth(deskHeight / 20)
-	})
+	const { height, width, depth } = xyz
 
 	return (
 		<Box
@@ -28,8 +17,8 @@ const Desk = ({
 			sx={{
 				display: { xs: 'none', sm: 'flex' },
 				m: 'auto',
-				height: `${deskHeight}px`,
-				width: `${deskWidth}px`,
+				height: `${height}px`,
+				width: `${width}px`,
 				justifyContent: 'center',
 				alignItems: 'center',
 				position: 'relative',
@@ -73,9 +62,9 @@ const Desk = ({
 							xs: '.25vw dotted rgb(226, 91, 10, 0.6)',
 							md: '2.5px dotted rgb(226, 91, 10, 0.6)',
 						},
-						height: `${deskDepth}px`,
+						height: `${depth}px`,
 						width: '100%',
-						transform: `rotateX(-90deg) translateZ(calc(${deskHeight}px / 2))`,
+						transform: `rotateX(-90deg) translateZ(calc(${height}px / 2))`,
 						position: 'absolute',
 					}}
 				/>
@@ -96,8 +85,8 @@ const Desk = ({
 						},
 						border: '1px solid rgb(46, 55, 67, .5)',
 						width: '100%',
-						height: `${deskDepth}px`,
-						transform: `rotateX(90deg) translateZ(calc(${deskHeight}px / 2))`,
+						height: `${depth}px`,
+						transform: `rotateX(90deg) translateZ(calc(${height}px / 2))`,
 						position: 'absolute',
 					}}
 				/>
@@ -117,9 +106,9 @@ const Desk = ({
 							bottom: 0,
 						},
 						border: '1px solid rgb(46, 55, 67, .5)',
-						width: `${deskDepth}px`,
+						width: `${depth}px`,
 						height: `100%`,
-						transform: `rotateY(90deg) translateZ(calc(${deskWidth}px / 2))`,
+						transform: `rotateY(90deg) translateZ(calc(${width}px / 2))`,
 						position: 'absolute',
 					}}
 				/>
@@ -139,9 +128,9 @@ const Desk = ({
 							bottom: 0,
 						},
 						border: '1px solid rgb(46, 55, 67, .5)',
-						width: `${deskDepth}px`,
+						width: `${depth}px`,
 						height: `100%`,
-						transform: `rotateY(90deg) translateZ(calc(-${deskWidth}px / 2))`,
+						transform: `rotateY(90deg) translateZ(calc(-${width}px / 2))`,
 						position: 'absolute',
 					}}
 				/>
@@ -161,9 +150,9 @@ const Desk = ({
 							bottom: 0,
 						},
 						border: '1px solid rgb(46, 55, 67, .5)',
-						width: `${deskWidth}px`,
-						height: `${deskHeight}px`,
-						transform: `rotateY(180deg) translateZ(calc(${deskDepth}px /2))`,
+						width: `${width}px`,
+						height: `${height}px`,
+						transform: `rotateY(180deg) translateZ(calc(${depth}px /2))`,
 						position: 'absolute',
 					}}
 				/>
@@ -187,9 +176,9 @@ const Desk = ({
 						display: 'flex',
 						flexDirection: 'column',
 						justifyContent: 'space-around',
-						width: `${deskWidth}px`,
-						height: `${deskHeight}px`,
-						transform: `rotateY(0deg) translateZ(calc(${deskDepth}px / 2))`,
+						width: `${width}px`,
+						height: `${height}px`,
+						transform: `rotateY(0deg) translateZ(calc(${depth}px / 2))`,
 						position: 'relative',
 					}}
 				>
