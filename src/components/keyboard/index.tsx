@@ -1,31 +1,30 @@
 import { Box, Tooltip } from '@mui/material'
-import { KeyRow, Key } from './key'
-import { Board } from './board'
-import { useEffect, useState } from 'react'
-import useKeyPress from 'utils/useKeyPress'
+import { useState } from 'react'
 import useEventListener from 'utils/useEventListener'
+import { Board } from './board'
+import { Key, KeyRow } from './key'
 
-const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
+const Keyboard = ({
+	xyz,
+}: {
+	xyz: { height: number; width: number; depth: number }
+}) => {
 	const firstSet: string = '1234567890-=\\`'
 	const secondSet: string = 'QWERTYUIOP[]'
 	const thirdSet: string = "ASDFGHJKL;'"
 	const fourthSet: string = '=ZXCVBNM,./'
 
 	// LxWxH 12 ½ x 4 ⅜ x .575 in.
-	const [boardWidth, setBoardWidth] = useState<number>(0)
-	const [boardHeight, setBoardHeight] = useState<number>(0)
-	const [boardDepth, setBoardDepth] = useState<number>(0)
+
 	const [pressedKeys, setPressedKeys] = useState<string[]>([])
 
-	useEffect(() => {
-		const maxContainerWidth: number = 1000
-		const calculated: number =
-			containerWidth < maxContainerWidth ? containerWidth : maxContainerWidth
-		setBoardWidth(calculated * (5 / 18))
-		setBoardHeight(boardWidth * (4.375 / 12.5))
-		setBoardDepth(boardWidth * (0.575 / 12.5))
-	})
+	// useEffect(() => {
+	// 	const maxContainerWidth: number = 1000
+	// 	const calculated: number =
+	// 		containerWidth < maxContainerWidth ? containerWidth : maxContainerWidth
+	// })
 
+	const { height, width } = xyz
 	const defaultKeys = (count, charSet) => {
 		const charArr = charSet.split('')
 		const rowKeys: JSX.Element[] = []
@@ -37,7 +36,7 @@ const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
 					pressed={isKeyPressed(charArr[i].toLowerCase())}
 					size={1}
 					variant="main"
-					width={boardWidth}
+					width={width}
 				/>,
 			)
 		}
@@ -73,7 +72,6 @@ const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
 	return (
 		<Tooltip
 			placement="top"
-			arrow
 			title={
 				<div style={{ whiteSpace: 'pre-line' }}>{`Keyboard: WhiteFox\n
 			Switches: Cherry MX Clear\n
@@ -86,35 +84,35 @@ const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
 				sx={{
 					m: '0 auto',
 					display: 'flex',
-					height: `${boardHeight}px`,
-					width: `${boardWidth}px`,
+					height: `${height}px`,
+					width: `${width}px`,
 					//flex
 					justifyContent: 'center',
 					alignItems: 'center',
 					position: 'relative',
 				}}
 			>
-				<Board width={boardWidth} height={boardHeight} depth={boardDepth}>
+				<Board xyz={xyz}>
 					{/* row 1 */}
-					<KeyRow width={boardWidth}>
+					<KeyRow width={width}>
 						<Key
 							char="Esc"
 							pressed={isKeyPressed('escape')}
 							size={1}
 							variant="special"
-							width={boardWidth}
+							width={width}
 						/>
 						{defaultKeys(14, firstSet)}
-						<Key char="Ó" size={1} variant="accent" width={boardWidth} />
+						<Key char="Ó" size={1} variant="accent" width={width} />
 					</KeyRow>
 					{/* row 2 */}
-					<KeyRow width={boardWidth}>
+					<KeyRow width={width}>
 						<Key
 							char="⭾ Tab"
 							pressed={isKeyPressed('tab')}
 							size={1.5}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						{defaultKeys(12, secondSet)}
 						<Key
@@ -122,24 +120,24 @@ const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
 							pressed={isKeyPressed('backspace')}
 							size={1.5}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
-							char="Delete"
+							char="Del"
 							pressed={isKeyPressed('delete')}
 							size={1}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 					</KeyRow>
 					{/* row 3 */}
-					<KeyRow width={boardWidth}>
+					<KeyRow width={width}>
 						<Key
-							char="Caps Lock"
+							char="Caps"
 							pressed={isKeyPressed('capslock')}
 							size={2}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						{defaultKeys(11, thirdSet)}
 						<Key
@@ -147,24 +145,24 @@ const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
 							pressed={isKeyPressed('enter')}
 							size={2}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char="PgUp"
 							pressed={isKeyPressed('pageup')}
 							size={1}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 					</KeyRow>
 					{/* row 4 */}
-					<KeyRow width={boardWidth}>
+					<KeyRow width={width}>
 						<Key
 							char="⇧ Shift"
 							pressed={isKeyPressed('shiftleft')}
 							size={2.5}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						{defaultKeys(10, fourthSet)}
 						<Key
@@ -172,82 +170,82 @@ const Keyboard = ({ containerWidth }: { containerWidth: number }) => {
 							pressed={isKeyPressed('shiftright')}
 							size={1.5}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char="↑"
 							pressed={isKeyPressed('arrowup')}
 							size={1}
 							variant="special"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char="PgDn"
 							pressed={isKeyPressed('pagedown')}
 							size={1}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 					</KeyRow>
 					{/* row 5 */}
-					<KeyRow width={boardWidth}>
+					<KeyRow width={width}>
 						<Key
-							char="Control"
+							char="Ctrl"
 							pressed={isKeyPressed('controlleft')}
 							size={1.3}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char="❖"
 							pressed={isKeyPressed('os')}
 							size={1.3}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char="Alt"
 							pressed={isKeyPressed('alt')}
 							size={1.3}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char=" "
 							pressed={isKeyPressed(' ')}
 							data-key="space"
 							size={6.5}
-							width={boardWidth}
+							width={width}
 						/>
-						<Key char="Fn" size={1.3} variant="accent" width={boardWidth} />
+						<Key char="Fn" size={1.3} variant="accent" width={width} />
 						<Key
 							char="Control"
 							pressed={isKeyPressed('controlright')}
 							size={1.3}
 							variant="accent"
-							width={boardWidth}
+							width={width}
 						/>
-						<Key char="" size={0.3} blank={true} width={boardWidth} />
+						<Key char="" size={0.3} blank={true} width={width} />
 						<Key
 							char="←"
 							pressed={isKeyPressed('arrowleft')}
 							size={1}
 							variant="special"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char="↓"
 							pressed={isKeyPressed('arrowdown')}
 							size={1}
 							variant="special"
-							width={boardWidth}
+							width={width}
 						/>
 						<Key
 							char="→"
 							pressed={isKeyPressed('arrowright')}
 							size={1}
 							variant="special"
-							width={boardWidth}
+							width={width}
 						/>
 					</KeyRow>
 				</Board>
