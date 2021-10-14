@@ -1,10 +1,10 @@
 import { keyframes } from '@emotion/react'
 
 const glow = keyframes`
-	from, 0% {
+	from {
 		box-shadow: 0 0 100px 20px rgba(40, 62, 115, .4); 
 	}
-	100%, to {
+	to {
 		box-shadow: 0 0 140px 20px rgba(40, 62, 115, .8);
 	}
 `
@@ -43,19 +43,18 @@ const signFlickerOn = keyframes`
 	from, 0%, 19%, 21%, 54%, 56%, 59%, 61%, 79%, 81%, 89%, 91%, 99%{
 		color: ${signColorOff};      
 		text-shadow: none;
-		box-shadow: none;
 
 		border: .4rem double ${signColorOff};
+		box-shadow: none;
 	}
 	20%, 55%, 60%,   {
-		border: .4rem double #fff;
+		border: .4rem double #fff;	
 		box-shadow: 0 0 .2rem #fff,
 		0 0 .2rem #fff,
 		0 0 2rem ${signColorOn},
 		0 0 0.8rem ${signColorOn},
 		0 0 2.8rem ${signColorOn},
-		inset 0 0 1.3rem ${signColorOn};
-		
+		inset 0 0 1.3rem ${signColorOn};	
 	}
 	80% { 
 		color: #fff;
@@ -69,6 +68,7 @@ const signFlickerOn = keyframes`
 			0 0 100px ${signColorOn},
 			0 0 150px ${signColorOn};
 
+		border: .4rem double ${signColorOff};
 		box-shadow: none;
 	}
 	90%, 100%, to { 
