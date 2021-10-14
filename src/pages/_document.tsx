@@ -2,6 +2,7 @@ import * as React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from '../../styles/createEmotionCache'
+import { theme } from '../../styles/theme.js'
 
 export default class MyDocument extends Document {
 	render() {
@@ -9,7 +10,7 @@ export default class MyDocument extends Document {
 			<Html lang="en">
 				<Head>
 					{/* PWA primary color */}
-					<meta name="theme-color" content={'#0B1015'} />
+					<meta name="theme-color" content={theme.palette.primary.main} />
 					<link rel="preconnect" href="https://fonts.googleapis.com" />
 					<link
 						rel="preconnect"
@@ -20,7 +21,6 @@ export default class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
 						rel="stylesheet"
 					/>
-				
 				</Head>
 				<body>
 					<Main />
@@ -55,7 +55,6 @@ MyDocument.getInitialProps = async (ctx) => {
 	// 2. page.getInitialProps
 	// 3. app.render
 	// 4. page.render
-
 	const originalRenderPage = ctx.renderPage
 
 	// You can consider sharing the same emotion cache between all the SSR requests to speed up performance.
