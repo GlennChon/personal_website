@@ -62,6 +62,7 @@ const Desk = ({
 							xs: '.25vw dotted rgb(226, 91, 10, 0.6)',
 							md: '2.5px dotted rgb(226, 91, 10, 0.6)',
 						},
+						boxShadow: '0 10px 15rem 1rem rgba(226, 91, 10, 0.3)',
 						height: `${depth}px`,
 						width: '100%',
 						transform: `rotateX(-90deg) translateZ(calc(${height}px / 2))`,
