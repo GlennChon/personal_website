@@ -10,8 +10,8 @@ const IconLauncher = ({ icon, label, onClick, sx }) => {
 			sx={{
 				color: 'white',
 				border: 'none',
-				width: { xs: '100px', sm: '50px' },
-				height: { xs: '100px', sm: '50px' },
+				width: '50px',
+				height: '50px',
 				display: 'flex',
 				flexDirection: 'column',
 				m: 1,
