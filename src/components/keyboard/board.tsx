@@ -1,19 +1,14 @@
 import { Box } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { useViewport } from '../../utils/ViewportProvider'
 import React, { ReactNode } from 'react'
 
 const Board = ({
-	height,
-	width,
-	depth,
+	xyz,
 	children,
 }: {
-	height: number
-	width: number
-	depth: number
+	xyz: { height: number; width: number; depth: number }
 	children: ReactNode
 }) => {
+	const { height, width, depth } = xyz
 	return (
 		<Box
 			className="keyboard"
