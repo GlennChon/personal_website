@@ -21,21 +21,43 @@ const powerOn = keyframes`
 		background: #fff !important;
 		animation-timing-function: ease-in;
 		transform: scale(0, 0.0001) translate3d(0, 0, 0);
-		-webkit-filter: brightness(50);
 		filter: brightness(50);
+		filter: brightness(0%);
 	}
 	70% {
 		background: #fff !important;
 		transform: scale(1.3, 0.001) translate3d(0, 0, 0);
-		-webkit-filter: brightness(10);
 		filter: brightness(10);
+		filter: brightness(50%);
 	}
 	100% {
 		background: #fff !important;
-		transform: scale(1, 1.3) translate3d(0, 0, 0);
-		-webkit-filter: brightness(1);
+		transform: scale(1, 1) translate3d(0, 0, 0);
+		filter: brightness(1);
 		filter: brightness(1);
 		opacity: 1;
 	}
 `
-export { glow, powerOn }
+
+const bounce = keyframes`
+	0%, {transform: translate3d(0,-100%,0);}
+	20%, 53%, 80% {
+		transform: translate3d(0,0,0);
+		display: block;
+	}
+	40%, 43% {
+		transform: translate3d(0, -30px, 0);
+	}
+	70% {
+		transform: translate3d(0, -15px, 0);
+	}
+	90% {
+		transform: translate3d(0,-4px,0);
+	}
+`
+const fadeIn = keyframes`
+	from { opacity: 0; }
+	to   { opacity: 1; }
+`
+
+export { bounce, fadeIn, glow, powerOn }
