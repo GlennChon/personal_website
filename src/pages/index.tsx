@@ -1,12 +1,14 @@
+import { Description, Email, GitHub, LinkedIn, Pets } from '@mui/icons-material'
+import { Backdrop, Box, Fade, Grid, Modal, Typography } from '@mui/material'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { Box, Backdrop, Fade, Grid, Modal, Typography } from '@mui/material'
-import { GitHub, Description, LinkedIn, Pets, Email } from '@mui/icons-material'
-import { Monitor, Desk, Display, Keyboard, Launchers } from '../components'
 import MonitorBackgrounds from '../../public/assets/gifs/monitor'
-import useElementSize from '../utils/useElementSize'
 import { powerOn, signFlicker, signFlickerOn } from '../../styles/animations'
+import { Desk, Display, Keyboard, Launchers, Monitor } from '../components'
+import useElementSize from '../utils/useElementSize'
+import useGoogleAnalytics from '../utils/useGoogleAnalytics'
 
 export default function Home() {
+	useGoogleAnalytics()
 	const objectContainerRef = useRef(null)
 	const { width } = useElementSize(objectContainerRef)
 	const [switchWallpaper, setSwitchWallpaper] = useState<boolean>(false)
