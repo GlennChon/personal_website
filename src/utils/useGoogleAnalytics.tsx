@@ -1,17 +1,19 @@
 import { useEffect } from 'react'
 import ReactGA from 'react-ga4'
-import { useLocation } from 'react-router-dom'
+import { useRouter } from 'next/router'
 
 const GA_MEASUREMENT_ID = 'G-XQ3BRPPVT0'
+const useGoogleAnalytics = () => {
+	const router = useRouter()
 
-export default function useGoogleAnalytics() {
-	const location = useLocation()
 	useEffect(() => {
 		ReactGA.initialize(GA_MEASUREMENT_ID)
 	}, [])
 
 	useEffect(() => {
-		const currentPath = location.pathname + location.search + location.hash
+		const currentPath = router.basePath
 		ReactGA.send({ hitType: 'pageview', page: currentPath })
-	}, [location])
+	}, [router])
 }
+
+export default useGoogleAnalytics
