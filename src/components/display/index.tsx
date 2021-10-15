@@ -36,7 +36,6 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 	})
 	return (
 		<Box
-			className="monitor-screen"
 			component={Grid}
 			container
 			item

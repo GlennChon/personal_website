@@ -13,6 +13,7 @@ const useGoogleAnalytics = () => {
 	useEffect(() => {
 		const currentPath = router.basePath
 		ReactGA.send({ hitType: 'pageview', page: currentPath })
+		console.log(currentPath)
 	}, [router])
 }
 

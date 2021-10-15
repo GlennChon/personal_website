@@ -1,4 +1,3 @@
-module.exports = {
-	reactStrictMode: true,
-	basePath: 'https://glennchon.com',
-}
+const nextConfig = { reactStrictMode: true, basePath: '' }
+
+module.exports = nextConfig
