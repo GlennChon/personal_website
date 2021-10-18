@@ -52,6 +52,7 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 				animation: `${fadeIn} 1s ease`,
 			}}
 		>
+			{/* TODO: replace gifs with mp4 and video tags to reduce load time. see: https://stackoverflow.com/questions/20818881/use-video-as-background-for-div */}
 			<Box
 				className="taskbar"
 				component={Grid}
@@ -148,7 +149,6 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 				order={{ sm: 1 }}
 				sx={{ height: '80%', flexGrow: 1 }}
 			>
-				{/* add react-draggable  */}
 				{children}
 			</Box>
 			<Grid

@@ -1,9 +1,17 @@
 import { Description, Email, GitHub, LinkedIn, Pets } from '@mui/icons-material'
 import { Backdrop, Box, Fade, Grid, Modal, Typography } from '@mui/material'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import MonitorBackgrounds from '../../public/assets/gifs/monitor'
 import { powerOn, signFlicker, signFlickerOn } from '../../styles/animations'
-import { Desk, Display, Keyboard, Launchers, Monitor } from '../components'
+import {
+	Desk,
+	Display,
+	Keyboard,
+	Launchers,
+	Monitor,
+	Window,
+	EmailForm,
+} from '../components'
 import useElementSize from '../utils/useElementSize'
 import useGoogleAnalytics from '../utils/useGoogleAnalytics'
 
@@ -11,26 +19,39 @@ export default function Home() {
 	useGoogleAnalytics()
 	const objectContainerRef = useRef(null)
 	const { width } = useElementSize(objectContainerRef)
+
 	const [switchWallpaper, setSwitchWallpaper] = useState<boolean>(false)
+	const [showWindow, setShowWindow] = useState<boolean>(false)
 	const [monitorXY, setMonitorXY] = useState({
 		width: null,
 		height: null,
 		mHeight: null,
 	})
+
 	const [deskXYZ, setDeskXYZ] = useState({
 		width: null,
 		height: null,
 		depth: null,
 	})
+
 	const [boardXYZ, setBoardXYZ] = useState({
 		width: null,
 		height: null,
 		depth: null,
 	})
+	const [WindowContents, setWindowContents] = useState<JSX.Element>(<></>)
 	const [cvClick, setCvClick] = useState(false)
 
-	const handleCvClick = () => setCvClick((prev) => !prev)
-	const openUrlClick = (url) => window.open(url, '_blank')
+	const handleMenuClick = () => setCvClick((prev) => !prev)
+	const openUrlClick = useCallback((url) => {
+		window.open(url, '_blank')
+	}, [])
+
+	const handleModalOpen = (DynamicComponent) => {
+		setWindowContents(DynamicComponent)
+		setShowWindow(true)
+	}
+	const handleModalClose = () => setShowWindow(false)
 
 	const launchers = [
 		{
@@ -56,11 +77,10 @@ export default function Home() {
 		},
 		{
 			/*Send Email*/
-			//opens faux window with input and send button
+			//opens modal
 			label: 'Send Message',
 			icon: Email,
-			onClick: handleCvClick,
-			//() => openUrlClick('https://www.glennchon.com/'),
+			onClick: () => handleModalOpen(<EmailForm />),
 		},
 	]
 
@@ -113,8 +133,6 @@ export default function Home() {
 				m: 'auto',
 			}}
 		>
-			{/* <h1>Glenn Chon</h1> */}
-
 			<Box
 				className="object-container"
 				ref={objectContainerRef}
@@ -143,10 +161,10 @@ export default function Home() {
 							textAlign: 'center',
 							p: 1,
 							color: 'primary.dark',
-							fontSize: { xs: '2rem', md: '2.5rem', lg: '3rem' },
-							animation: `${signFlickerOn} 5s normal 2s 1, ${signFlicker} 8s infinite 7s alternate`,
 							border: '.4rem double primary.dark',
 							borderRadius: 3,
+							fontSize: { xs: '2rem', md: '2.5rem', lg: '3rem' },
+							animation: `${signFlickerOn} 5s normal 1s 1, ${signFlicker} 8s infinite 6s alternate`,
 							textShadow: 'none',
 							boxShadow: 'none',
 						}}
@@ -161,7 +179,7 @@ export default function Home() {
 						m: 'auto',
 					}}
 				>
-					<Display handleMenuClick={handleCvClick} wallpaper={wallpaperSrc}>
+					<Display handleMenuClick={handleMenuClick} wallpaper={wallpaperSrc}>
 						<Launchers itemArr={launchers} />
 					</Display>
 				</Monitor>
@@ -192,12 +210,20 @@ export default function Home() {
 						/>
 					</Desk>
 				</Box>
+				<Window
+					title="Send Message"
+					open={showWindow}
+					handleClose={handleModalClose}
+				>
+					{WindowContents}
+				</Window>
 				{/* tmp modal */}
+
 				<Modal
 					aria-labelledby="transition-modal-title"
 					aria-describedby="transition-modal-description"
 					open={cvClick}
-					onClose={handleCvClick}
+					onClose={handleMenuClick}
 					closeAfterTransition
 					BackdropComponent={Backdrop}
 					BackdropProps={{
