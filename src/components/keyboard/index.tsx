@@ -1,5 +1,5 @@
 import { Box, Tooltip } from '@mui/material'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import useEventListener from 'utils/useEventListener'
 import { Board } from './board'
 import { Key, KeyRow } from './key'
@@ -49,18 +49,21 @@ const Keyboard = ({
 		}, 50)
 	}
 	const codeKeys: string[] = ['Shift', 'Control', 'Tab']
-	const onKeyUp = (e: KeyboardEvent) => {
-		let selected = (codeKeys.includes(e.key) ? e.code : e.key).toLowerCase()
-
-		setPressedKeys((prev) => prev.filter((i) => i !== `${selected}`))
-	}
-	const onKeyDown = (e: KeyboardEvent) => {
-		let selected = (codeKeys.includes(e.key) ? e.code : e.key).toLowerCase()
-		if (!pressedKeys.includes(selected)) {
-			setPressedKeys((prev) => [...prev, `${selected}`])
+	const onKeyUp = useCallback((e: KeyboardEvent) => {
+		if (e.key || e.code) {
+			let selected = (codeKeys.includes(e.key) ? e.code : e.key).toLowerCase()
+			setPressedKeys((prev) => prev.filter((i) => i !== `${selected}`))
 		}
-		if (e.key === 'Tab') autoKeyUp('tab')
-	}
+	}, [])
+	const onKeyDown = useCallback((e: KeyboardEvent) => {
+		if (e.key || e.code) {
+			let selected = (codeKeys.includes(e.key) ? e.code : e.key).toLowerCase()
+			if (!pressedKeys.includes(selected)) {
+				setPressedKeys((prev) => [...prev, `${selected}`])
+			}
+			if (e.key === 'Tab') autoKeyUp('tab')
+		}
+	}, [])
 
 	const isKeyPressed = (key: string): boolean => {
 		return pressedKeys.includes(key.toLowerCase())
