@@ -3,7 +3,7 @@
 FROM node:latest
 # Create and change to the app directory.
 WORKDIR /app
-
+ENV NODE_ENV production
 COPY package*.json ./
 
 # Install production dependencies.
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 # Remove unused src directory
 RUN rm -rf src/
-
+USER root
 EXPOSE 3000
 
 CMD ["npm", "start"]

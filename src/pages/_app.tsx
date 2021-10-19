@@ -22,6 +22,7 @@ function MyApp(props: MyAppProps) {
 			<Head>
 				<title>Glenn Chon</title>
 				<meta name="viewport" content="initial-scale=1, width=device-width" />
+				<script src="/__ENV.js" />
 			</Head>
 
 			<ThemeProvider theme={theme}>
