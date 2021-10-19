@@ -4,7 +4,7 @@ import {
 	FiveG,
 	SignalCellularAlt,
 	VolumeDown,
-	Wifi,
+	Wifi
 } from '@mui/icons-material'
 import { Box, Grid, IconButton, Stack } from '@mui/material'
 import React, { useEffect, useState } from 'react'
@@ -46,13 +46,25 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 				height: '100%',
 				width: '100%',
 				borderRadius: 1,
-				background: wallpaper
-					? `url(${wallpaper}) no-repeat 50% center / cover`
-					: 'black',
 				animation: `${fadeIn} 1s ease`,
+				position: 'relative',
 			}}
 		>
-			{/* TODO: replace gifs with mp4 and video tags to reduce load time. see: https://stackoverflow.com/questions/20818881/use-video-as-background-for-div */}
+			<Box
+				component="video"
+				autoPlay
+				muted
+				loop
+				sx={{
+					width: '100%',
+					height: '100%',
+					position: 'absolute',
+					objectFit: 'cover',
+					zIndex: 0,
+				}}
+			>
+				<source src={`${wallpaper}`} type="video/mp4" />
+			</Box>
 			<Box
 				className="taskbar"
 				component={Grid}
@@ -67,6 +79,8 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 					bgcolor: {
 						sm: 'rgb(46, 55, 67, .75)',
 					},
+
+					zIndex: 1,
 				}}
 			>
 				<Box

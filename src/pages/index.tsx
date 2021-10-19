@@ -1,16 +1,16 @@
 import { Description, Email, GitHub, LinkedIn, Pets } from '@mui/icons-material'
 import { Backdrop, Box, Fade, Grid, Modal, Typography } from '@mui/material'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import MonitorBackgrounds from '../../public/assets/gifs/monitor'
+import MonitorBackgrounds from '../../public/assets/mp4/monitor'
 import { powerOn, signFlicker, signFlickerOn } from '../../styles/animations'
 import {
 	Desk,
 	Display,
+	EmailForm,
 	Keyboard,
 	Launchers,
 	Monitor,
 	Window,
-	EmailForm,
 } from '../components'
 import useElementSize from '../utils/useElementSize'
 import useGoogleAnalytics from '../utils/useGoogleAnalytics'
