@@ -13,6 +13,16 @@ export default class MyDocument extends Document {
 					<link rel="manifest" href="/manifest.json" />
 					{/* PWA primary color */}
 					<meta name="theme-color" content={theme.palette.primary.main} />
+					<meta
+						property="og:title"
+						content="Get to know Glenn Chon"
+						key="title"
+					/>
+					<meta
+						name="description"
+						content="Check out Glenn's links and work"
+						key="description"
+					/>
 					<link rel="preconnect" href="https://fonts.googleapis.com" />
 					<link
 						rel="preconnect"
