@@ -3,26 +3,37 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from '../../styles/createEmotionCache'
 import { theme } from '../../styles/theme.js'
+const meta = {
+	name: 'Glenn Chon',
+	description: "Glenn's links and works",
+	site: 'glennchon.com',
+	url: 'https://glennchon.com/',
+}
 
 export default class MyDocument extends Document {
 	render() {
 		return (
-			<Html lang="en">
+			<Html lang="en-US">
 				<Head>
-					{/* mainfest */}
-					<link rel="manifest" href="/manifest.json" />
-					{/* PWA primary color */}
 					<meta name="theme-color" content={theme.palette.primary.main} />
+					<meta name="title" content={meta.name} />
+					<meta name="author" content={meta.name} />
+					<meta name="description" content={meta.description} />
+
+					{/* OG:tags */}
+					<meta property="og:title" content={meta.name} />
+					<meta property="og:type" content="website" />
+					<meta property="og:description" content={meta.description} />
+					<meta property="og:site_name" content={meta.site} />
+					<meta property="og:url" content={meta.url} />
 					<meta
-						property="og:title"
-						content="Get to know Glenn Chon"
-						key="title"
+						property="og:image"
+						content="https://glennchon.com/assets/images/GlennChon.jpg"
 					/>
-					<meta
-						name="description"
-						content="Check out Glenn's links and work"
-						key="description"
-					/>
+					{/* Twitter meta */}
+					<meta name="twitter:card" content="summary" />
+					<meta name="twitter:title" content={meta.name} />
+					<meta name="twitter:description" content={meta.description} />
 					<link rel="preconnect" href="https://fonts.googleapis.com" />
 					<link
 						rel="preconnect"
@@ -50,7 +61,8 @@ export default class MyDocument extends Document {
 						sizes="16x16"
 						href="/favicon-16x16.png"
 					/>
-					<link rel="manifest" href="/site.webmanifest"></link>
+					{/* mainfest */}
+					<link rel="manifest" href="/manifest.json" />
 				</Head>
 				<body>
 					<Main />
