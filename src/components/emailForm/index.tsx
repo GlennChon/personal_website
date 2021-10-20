@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import emailjs, { init } from 'emailjs-com'
-import env from '@beam-australia/react-env'
+// import env from '@beam-australia/react-env'
 
 const contactSchema = Yup.object().shape({
 	fullName: Yup.string().trim().required('Name required'),
@@ -17,7 +17,7 @@ const EmailForm = ({}) => {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const [formError, setFormError] = useState('')
 	useEffect(() => {
-		init(env('EMAIL_USER_ID'))
+		init(process.env.REACT_APP_EMAIL_USER_ID)
 	}, [])
 	const formik = useFormik({
 		initialValues: {
@@ -39,12 +39,16 @@ const EmailForm = ({}) => {
 			//LOGIN
 			console.log(data)
 			await emailjs
-				.send(env('EMAIL_SERVICE_ID'), env('EMAIL_TEMPLATE_ID'), {
-					to_name: 'Glenn',
-					from_name: data.fullName,
-					reply_to: data.email,
-					message: data.message,
-				})
+				.send(
+					process.env.REACT_APP_EMAIL_SERVICE_ID,
+					process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+					{
+						to_name: 'Glenn',
+						from_name: data.fullName,
+						reply_to: data.email,
+						message: data.message,
+					},
+				)
 				.then(
 					function (res) {
 						console.log('sent', res)

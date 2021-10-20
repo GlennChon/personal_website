@@ -3,9 +3,9 @@
 	"version": "0.2.3",
 	"private": true,
 	"scripts": {
-		"dev": "react-env --path ../../../.env -- next dev",
+		"dev": "next dev",
 		"build": "next build",
-		"start": "react-env --path ../../../.env -- next start",
+		"start": " next start",
 		"lint": "next lint"
 	},
 	"dependencies": {

@@ -148,7 +148,6 @@ export default function Home() {
 				<Grid
 					item
 					sx={{
-						// display: { xs: 'none', sm: 'flex' },
 						position: 'relative',
 						mb: { xs: 3, sm: 6 },
 					}}
