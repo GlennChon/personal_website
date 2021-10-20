@@ -17,7 +17,7 @@ const EmailForm = ({}) => {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const [formError, setFormError] = useState('')
 	useEffect(() => {
-		init(process.env.REACT_APP_EMAIL_USER_ID)
+		init(process.env.NEXT_PUBLIC_EMAIL_USER_ID)
 	}, [])
 	const formik = useFormik({
 		initialValues: {
@@ -37,11 +37,10 @@ const EmailForm = ({}) => {
 	const doSubmit = async (data) => {
 		try {
 			//LOGIN
-			console.log(data)
 			await emailjs
 				.send(
-					process.env.REACT_APP_EMAIL_SERVICE_ID,
-					process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+					process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID,
+					process.env.NEXT_PUBLIC_EMAIL_TEMPLATE_ID,
 					{
 						to_name: 'Glenn',
 						from_name: data.fullName,

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import ReactGA from 'react-ga4'
 import { useRouter } from 'next/router'
 
-const GA_MEASUREMENT_ID = 'G-XQ3BRPPVT0'
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_ANALYTICS_ID
 const useGoogleAnalytics = () => {
 	const router = useRouter()
 
