@@ -28,6 +28,7 @@
 		"**/*.tsx",
 		"public/assets/mp4/monitor/index.tsx",
 		"public/assets/mp4/special/index.tsx",
+		"public/assets/**/*",
 		"src/**/*",
 		"styles/**/*.tsx",
 		"styles/**/*.ts",
