@@ -1,0 +1,4 @@
+REACT_APP_EMAIL_SERVICE_ID='emailjs_service_id'
+REACT_APP_EMAIL_TEMPLATE_ID='emailjs_template_id'
+REACT_APP_EMAIL_USER_ID='emailjs_user_id'
+REACT_APP_ANALYTICS_ID='google_analytics_id'
