@@ -10,8 +10,8 @@ const LauncherIcon = ({ icon, label, color = 'white', onClick, sx }) => {
 			sx={{
 				color: color,
 				border: 'none',
-				width: '65px',
-				height: '65px',
+				width: '54px',
+				height: '54px',
 				display: 'flex',
 				flexDirection: 'column',
 				m: 1,
@@ -23,7 +23,7 @@ const LauncherIcon = ({ icon, label, color = 'white', onClick, sx }) => {
 			}}
 		>
 			{createElement(icon)}
-			<Typography sx={{ fontSize: { xs: '.5em', sm: '.4em', md: '.5em' } }}>
+			<Typography sx={{ fontSize: { xs: '.4em', sm: '.45em', md: '.5em' } }}>
 				{label}
 			</Typography>
 		</IconButton>

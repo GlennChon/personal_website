@@ -1,11 +1,19 @@
-import { Description, Email, GitHub, LinkedIn, Pets } from '@mui/icons-material'
-import { Backdrop, Box, Fade, Grid, Modal, Typography } from '@mui/material'
+import {
+	Description,
+	Email,
+	GitHub,
+	LinkedIn,
+	Pets,
+	Collections,
+} from '@mui/icons-material'
+import { Box, Grid, Typography } from '@mui/material'
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import MonitorBackgrounds from '../../public/assets/mp4/monitor'
 import { powerOn, signFlicker, signFlickerOn } from '../../styles/animations'
 import {
 	Desk,
 	Display,
+	DrawerMenu,
 	EmailForm,
 	Keyboard,
 	Launchers,
@@ -19,9 +27,10 @@ export default function Home() {
 	useGoogleAnalytics()
 	const objectContainerRef = useRef(null)
 	const { width } = useElementSize(objectContainerRef)
-
 	const [switchWallpaper, setSwitchWallpaper] = useState<boolean>(false)
 	const [showWindow, setShowWindow] = useState<boolean>(false)
+	const [showComingSoonWindow, setShowComingSoonWindow] =
+		useState<boolean>(false)
 	const [monitorXY, setMonitorXY] = useState({
 		width: null,
 		height: null,
@@ -40,9 +49,18 @@ export default function Home() {
 		depth: null,
 	})
 	const [WindowContents, setWindowContents] = useState<JSX.Element>(<></>)
-	const [cvClick, setCvClick] = useState(false)
 
-	const handleMenuClick = () => setCvClick((prev) => !prev)
+	const [menuAnchorEl, setMenuAnchorEl] = useState(null)
+	const [menuOpen, setMenuOpen] = useState(Boolean(menuAnchorEl))
+	const handleMenuClick = (event) => {
+		setMenuAnchorEl(event.currentTarget)
+		setMenuOpen((prev) => !prev)
+	}
+	const handleMenuClose = () => {
+		setMenuAnchorEl(null)
+		setMenuOpen(false)
+	}
+
 	const openUrlClick = useCallback((url) => {
 		window.open(url, '_blank')
 	}, [])
@@ -53,7 +71,44 @@ export default function Home() {
 	}
 	const handleModalClose = () => setShowWindow(false)
 
+	const handleComingSoonOpen = (DynamicComponent) => {
+		setWindowContents(DynamicComponent)
+		setShowComingSoonWindow(true)
+	}
+	const handleComingSoonClose = () => setShowComingSoonWindow(false)
+
 	const launchers = [
+		{
+			label: 'FetchWork',
+			icon: Pets,
+			onClick: () => openUrlClick('https://www.fetchwork.io'),
+		},
+		{
+			label: 'Résumé',
+			icon: Description,
+			onClick: () =>
+				openUrlClick('https://glennchon.com/assets/docs/Glenn_Chon_Resume.pdf'),
+		},
+		{
+			/*Send Email*/
+			//opens modal
+			label: 'Send Message',
+			icon: Email,
+			onClick: () => handleModalOpen(<EmailForm />),
+		},
+	]
+
+	const menuLaunchers = [
+		{
+			label: 'FetchWork',
+			icon: Pets,
+			onClick: () => openUrlClick('https://www.fetchwork.io'),
+		},
+		{
+			label: 'Gallery',
+			icon: Collections,
+			onClick: () => handleComingSoonOpen(<span>Coming Soon!</span>),
+		},
 		{
 			label: 'GitHub',
 			icon: GitHub,
@@ -63,11 +118,6 @@ export default function Home() {
 			label: 'LinkedIn',
 			icon: LinkedIn,
 			onClick: () => openUrlClick('https://www.linkedin.com/in/glenn-chon'),
-		},
-		{
-			label: 'FetchWork',
-			icon: Pets,
-			onClick: () => openUrlClick('https://www.fetchwork.io'),
 		},
 		{
 			label: 'Résumé',
@@ -112,7 +162,6 @@ export default function Home() {
 			height: baseWidth * (1 / 3),
 			depth: (baseWidth * (1 / 3)) / 20,
 		})
-
 		setBoardXYZ({
 			width: boardWidth,
 			height: boardWidth * (4.375 / 12.5),
@@ -179,7 +228,19 @@ export default function Home() {
 					}}
 				>
 					<Display handleMenuClick={handleMenuClick} wallpaper={wallpaperSrc}>
-						<Launchers itemArr={launchers} />
+						<>
+							<Launchers itemArr={launchers} />
+							<DrawerMenu
+								anchorEl={menuAnchorEl}
+								xy={{
+									height: monitorXY.height,
+									width: monitorXY.width,
+								}}
+								open={menuOpen}
+								handleClose={handleMenuClose}
+								itemArr={menuLaunchers}
+							/>
+						</>
 					</Display>
 				</Monitor>
 				<Box
@@ -217,49 +278,13 @@ export default function Home() {
 					{WindowContents}
 				</Window>
 				{/* tmp modal */}
-
-				<Modal
-					aria-labelledby="transition-modal-title"
-					aria-describedby="transition-modal-description"
-					open={cvClick}
-					onClose={handleMenuClick}
-					closeAfterTransition
-					BackdropComponent={Backdrop}
-					BackdropProps={{
-						timeout: 500,
-					}}
+				<Window
+					title="Work in Progress"
+					open={showComingSoonWindow}
+					handleClose={handleComingSoonClose}
 				>
-					<Fade in={cvClick}>
-						<Box
-							sx={{
-								position: 'absolute',
-								height: 'auto',
-								top: '50%',
-								left: '50%',
-								transform: 'translate(-50%, -50%)',
-								width: 400,
-								bgcolor: 'background.paper',
-								border: '2px solid #000',
-								boxShadow: 24,
-								p: 4,
-								color: 'white',
-							}}
-						>
-							<Typography
-								id="transition-modal-title"
-								variant="h6"
-								component="h2"
-							>
-								Coming Soon
-							</Typography>
-							<Typography id="transition-modal-description" sx={{ mt: 2 }}>
-								Still spending nights working on this. In the mean time please
-								check out the first four launcher icons or try typing on your
-								keyboard.
-							</Typography>
-						</Box>
-					</Fade>
-				</Modal>
+					{WindowContents}
+				</Window>
 			</Box>
 		</Box>
 	)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box } from '@mui/material'
-import LauncherIcon from './launcherIcon'
+import { LauncherIcon } from 'components'
 
 const Launchers = ({ itemArr = [] }) => {
 	const clickableIcons = () => {

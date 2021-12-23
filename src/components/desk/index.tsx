@@ -59,8 +59,8 @@ const Desk = ({
 						borderRadius: '5px',
 						borderTop: '1px solid rgb(46, 55, 67, .5)',
 						borderBottom: {
-							xs: '.25vw dotted rgb(226, 91, 10, 0.6)',
-							md: '2.5px dotted rgb(226, 91, 10, 0.6)',
+							xs: '.25vw dotted white',
+							md: '2.5px dotted white',
 						},
 						boxShadow: '0 10px 15rem 1rem rgba(226, 91, 10, 0.3)',
 						height: `${depth}px`,

@@ -4,7 +4,7 @@ import {
 	FiveG,
 	SignalCellularAlt,
 	VolumeDown,
-	Wifi
+	Wifi,
 } from '@mui/icons-material'
 import { Box, Grid, IconButton, Stack } from '@mui/material'
 import React, { useEffect, useState } from 'react'
@@ -161,7 +161,11 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 				container
 				item
 				order={{ sm: 1 }}
-				sx={{ height: '80%', flexGrow: 1 }}
+				sx={{
+					height: '80%',
+					width: '100%',
+					flexGrow: 1,
+				}}
 			>
 				{children}
 			</Box>

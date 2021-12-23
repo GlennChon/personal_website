@@ -3,6 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import createEmotionServer from '@emotion/server/create-instance'
 import createEmotionCache from '../../styles/createEmotionCache'
 import { theme } from '../../styles/theme.js'
+
 const meta = {
 	name: 'Glenn Chon',
 	description: "Glenn's links and works",
@@ -13,62 +14,64 @@ const meta = {
 export default class MyDocument extends Document {
 	render() {
 		return (
-			<Html lang="en-US">
-				<Head>
-					<meta name="theme-color" content={theme.palette.primary.main} />
-					<meta name="title" content={meta.name} />
-					<meta name="author" content={meta.name} />
-					<meta name="description" content={meta.description} />
+			<>
+				<Html lang="en-US">
+					<Head>
+						<meta name="theme-color" content={theme.palette.primary.main} />
+						<meta name="title" content={meta.name} />
+						<meta name="author" content={meta.name} />
+						<meta name="description" content={meta.description} />
 
-					{/* OG:tags */}
-					<meta property="og:title" content={meta.name} />
-					<meta property="og:type" content="website" />
-					<meta property="og:description" content={meta.description} />
-					<meta property="og:site_name" content={meta.site} />
-					<meta property="og:url" content={meta.url} />
-					<meta
-						property="og:image"
-						content="https://glennchon.com/assets/images/GlennChon.jpg"
-					/>
-					{/* Twitter meta */}
-					<meta name="twitter:card" content="summary" />
-					<meta name="twitter:title" content={meta.name} />
-					<meta name="twitter:description" content={meta.description} />
-					<link rel="preconnect" href="https://fonts.googleapis.com" />
-					<link
-						rel="preconnect"
-						href="https://fonts.gstatic.com"
-						crossOrigin={'true'}
-					/>
-					<link
-						href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
-						rel="stylesheet"
-					/>
-					<link
-						rel="apple-touch-icon"
-						sizes="180x180"
-						href="/apple-touch-icon.png"
-					/>
-					<link
-						rel="icon"
-						type="image/png"
-						sizes="32x32"
-						href="/favicon-32x32.png"
-					/>
-					<link
-						rel="icon"
-						type="image/png"
-						sizes="16x16"
-						href="/favicon-16x16.png"
-					/>
-					{/* mainfest */}
-					<link rel="manifest" href="/manifest.json" />
-				</Head>
-				<body>
-					<Main />
-					<NextScript />
-				</body>
-			</Html>
+						{/* OG:tags */}
+						<meta property="og:title" content={meta.name} />
+						<meta property="og:type" content="website" />
+						<meta property="og:description" content={meta.description} />
+						<meta property="og:site_name" content={meta.site} />
+						<meta property="og:url" content={meta.url} />
+						<meta
+							property="og:image"
+							content="https://glennchon.com/assets/images/GlennChon.jpg"
+						/>
+						{/* Twitter meta */}
+						<meta name="twitter:card" content="summary" />
+						<meta name="twitter:title" content={meta.name} />
+						<meta name="twitter:description" content={meta.description} />
+						<link rel="preconnect" href="https://fonts.googleapis.com" />
+						<link
+							rel="preconnect"
+							href="https://fonts.gstatic.com"
+							crossOrigin={'true'}
+						/>
+						<link
+							href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap"
+							rel="stylesheet"
+						/>
+						<link
+							rel="apple-touch-icon"
+							sizes="180x180"
+							href="/apple-touch-icon.png"
+						/>
+						<link
+							rel="icon"
+							type="image/png"
+							sizes="32x32"
+							href="/favicon-32x32.png"
+						/>
+						<link
+							rel="icon"
+							type="image/png"
+							sizes="16x16"
+							href="/favicon-16x16.png"
+						/>
+						{/* mainfest */}
+						<link rel="manifest" href="/manifest.json" />
+					</Head>
+					<body>
+						<Main />
+						<NextScript />
+					</body>
+				</Html>
+			</>
 		)
 	}
 }

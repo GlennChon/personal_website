@@ -7,6 +7,9 @@ import createEmotionCache from '../../styles/createEmotionCache'
 import { theme } from '../../styles/theme'
 import { ViewportProvider } from '../utils/ViewportProvider'
 import '/styles/globals.css'
+//snow
+import { Snow } from 'components/seasonal/winter'
+import { Box } from '@mui/material'
 
 interface MyAppProps extends AppProps {
 	emotionCache?: EmotionCache
@@ -24,8 +27,19 @@ function MyApp(props: MyAppProps) {
 				<meta name="viewport" content="initial-scale=1, width=device-width" />
 				<script src="/__ENV.js" />
 			</Head>
-
 			<ThemeProvider theme={theme}>
+				<Box
+					sx={{
+						height: '100%',
+						width: '100%',
+						position: 'absolute',
+						left: 0,
+						top: 0,
+						overflow: 'hidden',
+					}}
+				>
+					<Snow />
+				</Box>
 				<ViewportProvider>
 					<CssBaseline />
 					<Component {...pageProps} />

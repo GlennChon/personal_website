@@ -6,7 +6,7 @@ This is my personal website. It will probably change as I find time to work on i
 
 - X-Small screens, the display turns into a mobile phone.
 - Small screens and larger, the display is a desktop setup.
-- Typing on your keyboard moves the keys on the desktop keyboard setup.
+- Typing on your keyboard moves the keys on the desktop keyboard.
 
 Try sending me a message!
 

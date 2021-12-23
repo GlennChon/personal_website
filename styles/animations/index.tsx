@@ -128,4 +128,20 @@ const signFlicker = keyframes`
 	}
 `
 
-export { fadeIn, glow, powerOn, signFlicker, signFlickerOn }
+const fall = keyframes`
+	0% {
+		opacity: 0;
+	}
+	3% {
+		opacity: 0.9;
+	}
+	90% {
+		opacity: 0.9;
+	}
+	100% {
+		transform: translate(0, 90vh);
+		opacity: 0;
+	}
+`
+
+export { fadeIn, fall, glow, powerOn, signFlicker, signFlickerOn }
