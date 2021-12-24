@@ -1,6 +1,7 @@
 import { Box, Paper, Popper, useMediaQuery, useTheme } from '@mui/material'
 import { useEffect, useState } from 'react'
-import DrawerLaunchers from './../drawerLaunchers'
+import { DrawerLaunchers, DrawerSearchBar } from './../../components'
+
 const DrawerMenu = ({ ...props }) => {
 	const { anchorEl, handleClose, open, xy, itemArr } = props
 	const [menuAnchorEl, setMenuAnchorEl] = useState(null)
@@ -71,8 +72,10 @@ const DrawerMenu = ({ ...props }) => {
 					mb: 0,
 					ml: { xs: 0, sm: 1 },
 					border: '1px solid grey',
+					px: { xs: 2, sm: 0, md: 2 },
 				}}
 			>
+				<DrawerSearchBar />
 				<DrawerLaunchers itemArr={itemArr} width={xy.width} />
 			</Box>
 		</Popper>
@@ -80,48 +83,3 @@ const DrawerMenu = ({ ...props }) => {
 }
 
 export default DrawerMenu
-
-/*
-position: 'absolute',
-				left: 0,
-				right: 0,
-				top: 0,
-				bottom: 0,
-				border: '1px solid green',
-
-				'& .MuiBackdrop-root': {
-					height: '100%',
-					width: '100%',
-					position: 'absolute',
-					border: '1px solid blue',
-				},
-				'& .MuiPaper-root': {
-					height: `${menuXY.height}px`,
-					width: `${menuXY.width}px`,
-					border: '.1px solid grey',
-					borderBottomLeftRadius: 0,
-					borderBottomRightRadius: 0,
-					left: 0,
-					right: 0,
-					top: 0,
-					bottom: 0,
-				},
-
-
-				sx={{
-				position: 'absolute',
-
-				'& .MuiPaper-root': {
-					height: `${menuXY.height}px`,
-					width: `${menuXY.width}px`,
-					border: '.1px solid grey',
-					borderBottomLeftRadius: 0,
-					borderBottomRightRadius: 0,
-					position: 'absolute',
-					left: 0,
-					right: 0,
-					bottom: 0,
-					top: -10,
-				},
-			}}
-*/
