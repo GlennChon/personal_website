@@ -139,7 +139,7 @@ const fall = keyframes`
 		opacity: 0.9;
 	}
 	100% {
-		transform: translate(0, 90vh);
+		transform: translate(0, 97vh);
 		opacity: 0;
 	}
 `

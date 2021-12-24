@@ -17,11 +17,8 @@ const Snowflake = (props) => {
 
 class Snow extends Component {
 	snow = () => {
-		let arr = Array.from(
-			'Snowflakes are awesome!!! They are like little pieces of magic!!! Love snowflakes!!! Snowflakes are awesome!!! They are like little pieces of magic!!! Love snowflakes!!! Snowflakes are awesome!!! They are like little pieces of magic!!! Love snowflakes!!!',
-		)
-		// @ts-ignore
-		return arr.map((el, i) => {
+		let arr = []
+		for (let i = 0; i < 254; i++) {
 			let animationDelay = `${(Math.random() * 16).toFixed(2)}s`
 			let fontSize = `${Math.floor(Math.random() * 10) + 10}px`
 
@@ -35,9 +32,11 @@ class Snow extends Component {
 				p: 0,
 				animation: `${fall} 16s linear infinite`,
 				animationDelay: animationDelay,
+				zIndex: '-5',
 			}
-			return <Snowflake key={i} id={i} style={style} />
-		})
+			arr.push(<Snowflake key={i} id={i} style={style} />)
+		}
+		return arr
 	}
 
 	render() {
