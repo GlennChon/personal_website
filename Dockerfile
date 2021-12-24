@@ -1,6 +1,6 @@
 
 # Get NPM packages
-FROM node:latest
+FROM node:lts-alpine
 # Create and change to the app directory.
 WORKDIR /app
 ENV NODE_ENV production
