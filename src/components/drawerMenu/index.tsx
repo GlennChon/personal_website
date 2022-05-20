@@ -1,15 +1,22 @@
-import { Box, Paper, Popper, useMediaQuery, useTheme } from '@mui/material'
+import {
+	Box,
+	Grid,
+	Paper,
+	Popper,
+	Slide,
+	useMediaQuery,
+	useTheme,
+} from '@mui/material'
 import { useEffect, useState } from 'react'
 import { DrawerLaunchers, DrawerSearchBar } from './../../components'
 
 const DrawerMenu = ({ ...props }) => {
-	const { anchorEl, handleClose, open, xy, itemArr } = props
+	const { anchorEl, displayAreaRef, handleClose, open, xy, itemArr } = props
 	const [menuAnchorEl, setMenuAnchorEl] = useState(null)
 	const [menuXY, setMenuXY] = useState({ height: null, width: null })
 	const theme = useTheme()
 	const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 	const isMd = useMediaQuery(theme.breakpoints.down('md'))
-
 	const [isCurrent, setIsCurrent] = useState(isMobile)
 	useEffect(() => {
 		if (isCurrent != isMobile) {
@@ -41,16 +48,14 @@ const DrawerMenu = ({ ...props }) => {
 		}
 	}, [anchorEl, isMobile, isMd, xy.height, xy.width])
 
-	useEffect(() => {
-		console.log('< sm', isMobile)
-	}, [isMobile])
-
 	return (
-		<Popper
+		<Box
+			component={Popper}
 			anchorEl={menuAnchorEl}
 			open={open}
 			placement="top"
 			disablePortal={true}
+			transition
 			modifiers={[
 				{
 					name: 'preventOverflow',
@@ -63,22 +68,38 @@ const DrawerMenu = ({ ...props }) => {
 					},
 				},
 			]}
+			sx={{ position: 'relative', zIndex: 0 }}
 		>
-			<Box
-				component={Paper}
-				sx={{
-					width: menuXY.width,
-					height: menuXY.height,
-					mb: 0,
-					ml: { xs: 0, sm: 1 },
-					border: '1px solid grey',
-					px: { xs: 2, sm: 0, md: 2 },
-				}}
-			>
-				<DrawerSearchBar />
-				<DrawerLaunchers itemArr={itemArr} width={xy.width} />
-			</Box>
-		</Popper>
+			{({ TransitionProps }) => (
+				<Slide
+					direction="up"
+					{...TransitionProps}
+					container={displayAreaRef.current}
+				>
+					<Box
+						component={Paper}
+						sx={{
+							width: menuXY.width,
+							height: menuXY.height,
+							mb: 0,
+							ml: { xs: 0, sm: 1 },
+							border: '1px solid grey',
+							px: { xs: 2, sm: 0, md: 2 },
+							position: 'relative',
+						}}
+					>
+						<Grid container>
+							<Grid item xs={12}>
+								<DrawerSearchBar />
+							</Grid>
+							<Grid item xs={12}>
+								<DrawerLaunchers itemArr={itemArr} width={xy.width} />
+							</Grid>
+						</Grid>
+					</Box>
+				</Slide>
+			)}
+		</Box>
 	)
 }
 

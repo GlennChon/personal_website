@@ -3,13 +3,11 @@ import { CssBaseline } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
 import type { AppProps /*, AppContext */ } from 'next/app'
 import Head from 'next/head'
+import WeatherProvider from 'utils/WeatherProvider'
 import createEmotionCache from '../../styles/createEmotionCache'
 import { theme } from '../../styles/theme'
 import { ViewportProvider } from '../utils/ViewportProvider'
 import '/styles/globals.css'
-//snow
-import { Snow } from 'components/seasonal/winter'
-import { Box } from '@mui/material'
 
 interface MyAppProps extends AppProps {
 	emotionCache?: EmotionCache
@@ -28,22 +26,12 @@ function MyApp(props: MyAppProps) {
 				<script src="/__ENV.js" />
 			</Head>
 			<ThemeProvider theme={theme}>
-				<Box
-					sx={{
-						height: '100%',
-						width: '100%',
-						position: 'absolute',
-						left: 0,
-						top: 0,
-						overflow: 'hidden',
-					}}
-				>
-					<Snow />
-				</Box>
-				<ViewportProvider>
-					<CssBaseline />
-					<Component {...pageProps} />
-				</ViewportProvider>
+				<WeatherProvider>
+					<ViewportProvider>
+						<CssBaseline />
+						<Component {...pageProps} />
+					</ViewportProvider>
+				</WeatherProvider>
 			</ThemeProvider>
 		</CacheProvider>
 	)

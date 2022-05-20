@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { fall } from '../../../../../styles/animations'
+import { fall } from '../../../../styles/animations'
 import { Box } from '@mui/material'
 
 const Snowflake = (props) => {
@@ -15,8 +15,7 @@ const Snowflake = (props) => {
 }
 
 class Snow extends Component {
-	snow = (speed=16) => {
-		//speed 1-x, x being slowest
+	snow = () => {
 		let arr = []
 		for (let i = 0; i < 254; i++) {
 			let animationDelay = `${(Math.random() * 16).toFixed(2)}s`
@@ -30,9 +29,10 @@ class Snow extends Component {
 				fontSize: fontSize,
 				m: 0.4,
 				p: 0,
-				animation: `${fall} ${speed}s linear infinite`,
+				animation: `${fall} 16s linear infinite`,
 				animationDelay: animationDelay,
 				zIndex: '-5',
+				position: 'relative',
 			}
 			arr.push(<Snowflake key={i} id={i} style={style} />)
 		}

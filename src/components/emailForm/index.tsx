@@ -45,8 +45,7 @@ const EmailForm = ({}) => {
 					message: data.message,
 				})
 				.then(
-					function (res) {
-						console.log('sent', res)
+					function () {
 						setIsSubmitted(true)
 						setTimeout(function () {
 							setIsSubmitted(false)

@@ -22,7 +22,6 @@ const DrawerLaunchers = ({ itemArr = [], width }) => {
 			sumIconWidth = iconWidth * 5
 			margin = (displayWidth - sumIconWidth) / 10
 		}
-		console.log(displayWidth, sumIconWidth, margin)
 		if (width) {
 			iconMargin = margin
 		}

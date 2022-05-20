@@ -36,6 +36,7 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 	})
 	return (
 		<Box
+			className="display-screen"
 			component={Grid}
 			container
 			item
@@ -48,9 +49,11 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 				borderRadius: 1,
 				animation: `${fadeIn} 1s ease`,
 				position: 'relative',
+				zIndex: 4,
 			}}
 		>
 			<Box
+				className="display-wallpaper"
 				component="video"
 				autoPlay
 				muted
@@ -66,11 +69,26 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 				<source src={`${wallpaper}`} type="video/mp4" />
 			</Box>
 			<Box
-				className="taskbar"
+				className="display-desktop"
 				component={Grid}
 				container
 				item
-				order={{ sm: 2 }}
+				order={{ xs: 2, sm: 1 }}
+				sx={{
+					height: '80%',
+					width: '100%',
+					flexGrow: 1,
+					zIndex: 3,
+				}}
+			>
+				{children}
+			</Box>
+			<Box
+				className="display-taskbar"
+				component={Grid}
+				container
+				item
+				order={{ xs: 1, sm: 2 }}
 				direction="row"
 				alignItems={{ xs: 'flex-start', sm: 'center' }}
 				justifyContent={{ xs: 'space-between', sm: 'flex-end' }}
@@ -80,7 +98,7 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 						sm: 'rgb(46, 55, 67, .75)',
 					},
 
-					zIndex: 1,
+					zIndex: 3,
 				}}
 			>
 				<Box
@@ -156,30 +174,18 @@ const Display = ({ wallpaper, handleMenuClick, children }) => {
 					</Grid>
 				</Box>
 			</Box>
-			<Box
-				component={Grid}
-				container
-				item
-				order={{ sm: 1 }}
-				sx={{
-					height: '80%',
-					width: '100%',
-					flexGrow: 1,
-				}}
-			>
-				{children}
-			</Box>
 			<Grid
 				className="mobile-bottom-toolbar"
 				container
 				item
-				order={{ xs: 1 }}
+				order={{ xs: 3 }}
 				direction="row"
 				justifyContent="center"
 				alignItems="center"
 				sx={{
 					display: { xs: 'flex', sm: 'none' },
 					bgcolor: 'rgb(46, 55, 67, .33)',
+					zIndex: 3,
 				}}
 			>
 				<IconButton

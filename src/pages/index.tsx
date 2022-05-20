@@ -7,7 +7,15 @@ import {
 	Collections,
 } from '@mui/icons-material'
 import { Box, Grid, Typography } from '@mui/material'
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+	forwardRef,
+	Ref,
+	useCallback,
+	useEffect,
+	useMemo,
+	useRef,
+	useState,
+} from 'react'
 import MonitorBackgrounds from '../../public/assets/mp4/monitor'
 import { powerOn, signFlicker, signFlickerOn } from '../../styles/animations'
 import {
@@ -22,7 +30,12 @@ import {
 } from '../components'
 import useElementSize from '../utils/useElementSize'
 import useGoogleAnalytics from '../utils/useGoogleAnalytics'
+// import { useWeather } from 'utils/WeatherProvider'
 
+
+const DisplayChildren = forwardRef((props, ref: Ref<HTMLDivElement>) => {
+	return <div ref={ref}>{props.children}</div>
+})
 export default function Home() {
 	useGoogleAnalytics()
 	const objectContainerRef = useRef(null)
@@ -49,6 +62,10 @@ export default function Home() {
 		depth: null,
 	})
 	const [WindowContents, setWindowContents] = useState<JSX.Element>(<></>)
+	const displayAreaRef = useRef()
+	// get weather
+
+	// const weather = useWeather()
 
 	const [menuAnchorEl, setMenuAnchorEl] = useState(null)
 	const [menuOpen, setMenuOpen] = useState(Boolean(menuAnchorEl))
@@ -56,6 +73,7 @@ export default function Home() {
 		setMenuAnchorEl(event.currentTarget)
 		setMenuOpen((prev) => !prev)
 	}
+
 	const handleMenuClose = () => {
 		setMenuAnchorEl(null)
 		setMenuOpen(false)
@@ -149,6 +167,10 @@ export default function Home() {
 		]
 	}, [switchWallpaper])
 
+	// const Weather = () => {
+	// 	return weather.display
+	// }
+
 	useEffect(() => {
 		const baseWidth = width * 0.8
 		const boardWidth = baseWidth * (1 / 3)
@@ -170,122 +192,136 @@ export default function Home() {
 	}, [width])
 
 	return (
-		<Box
-			component={Grid}
-			container
-			direction="row"
-			justifyContent="center"
-			alignItems="center"
-			maxWidth="lg"
-			sx={{
-				height: '100%',
-				m: 'auto',
-			}}
-		>
+		<>
 			<Box
-				className="object-container"
-				ref={objectContainerRef}
 				component={Grid}
-				xs={11}
-				item
+				container
+				direction="row"
+				justifyContent="center"
+				alignItems="center"
+				maxWidth="lg"
 				sx={{
 					height: '100%',
-					width: '100%',
-					animation: `${powerOn} 1s ease-in-out`,
+					m: 'auto',
 				}}
 			>
-				<Grid
+				<Box
+					className="object-container"
+					ref={objectContainerRef}
+					component={Grid}
+					xs={11}
 					item
 					sx={{
-						position: 'relative',
-						mb: { xs: 3, sm: 6 },
+						height: '100%',
+						width: '100%',
+						animation: `${powerOn} 1s ease-in-out`,
 					}}
 				>
-					<Typography
+					<Grid
+						item
 						sx={{
-							m: 'auto',
-							width: { xs: '250px', md: '300px', lg: '350px' },
-							fontFamily: "'Neon Tubes 2'",
-							textAlign: 'center',
-							p: 1,
-							color: 'primary.dark',
-							border: '.4rem double primary.dark',
-							borderRadius: 3,
-							fontSize: { xs: '2rem', md: '2.5rem', lg: '3rem' },
-							animation: `${signFlickerOn} 5s normal 1s 1, ${signFlicker} 8s infinite 6s alternate`,
-							textShadow: 'none',
-							boxShadow: 'none',
+							position: 'relative',
+							mb: { xs: 3, sm: 6 },
 						}}
 					>
-						Glenn Chon
-					</Typography>
-				</Grid>
-				<Monitor
-					sx={{
-						height: { xs: monitorXY.mHeight, sm: monitorXY.height },
-						width: monitorXY.width,
-						m: 'auto',
-					}}
-				>
-					<Display handleMenuClick={handleMenuClick} wallpaper={wallpaperSrc}>
-						<>
-							<Launchers itemArr={launchers} />
-							<DrawerMenu
-								anchorEl={menuAnchorEl}
-								xy={{
-									height: monitorXY.height,
-									width: monitorXY.width,
-								}}
-								open={menuOpen}
-								handleClose={handleMenuClose}
-								itemArr={menuLaunchers}
-							/>
-						</>
-					</Display>
-				</Monitor>
-				<Box
-					className="desk-setup-container"
-					component="div"
-					sx={{
-						position: 'relative',
-						'*, *::after': {
-							boxSizing: 'border-box',
-							transformStyle: 'preserve-3d',
-						},
-					}}
-				>
-					<Desk
-						xyz={{
-							height: deskXYZ.height,
-							width: deskXYZ.width,
-							depth: deskXYZ.depth,
-						}}
-					>
-						<Keyboard
-							xyz={{
-								height: boardXYZ.height,
-								width: boardXYZ.width,
-								depth: boardXYZ.depth,
+						<Typography
+							sx={{
+								m: 'auto',
+								width: { xs: '250px', md: '300px', lg: '350px' },
+								fontFamily: "'Neon Tubes 2'",
+								textAlign: 'center',
+								p: 1,
+								color: 'primary.dark',
+								border: '.4rem double primary.dark',
+								borderRadius: 3,
+								fontSize: { xs: '2rem', md: '2.5rem', lg: '3rem' },
+								animation: `${signFlickerOn} 5s normal 1s 1, ${signFlicker} 8s infinite 6s alternate`,
+								textShadow: 'none',
+								boxShadow: 'none',
 							}}
-						/>
-					</Desk>
+						>
+							Glenn Chon
+						</Typography>
+					</Grid>
+					<Monitor
+						sx={{
+							height: { xs: monitorXY.mHeight, sm: monitorXY.height },
+							width: monitorXY.width,
+							m: 'auto',
+							zIndex: 5,
+							position: 'relative',
+						}}
+					>
+						<Display handleMenuClick={handleMenuClick} wallpaper={wallpaperSrc}>
+							<Box
+								className="display-child-container"
+								component={DisplayChildren}
+								ref={displayAreaRef}
+								sx={{
+									height: '100%',
+									width: '100%',
+									border: '1px solid red',
+								}}
+							>
+								<Launchers itemArr={launchers} />
+								<DrawerMenu
+									anchorEl={menuAnchorEl}
+									displayAreaRef={displayAreaRef}
+									xy={{
+										height: monitorXY.height,
+										width: monitorXY.width,
+									}}
+									open={menuOpen}
+									handleClose={handleMenuClose}
+									itemArr={menuLaunchers}
+								/>
+							</Box>
+						</Display>
+					</Monitor>
+					<Box
+						className="desk-setup-container"
+						component="div"
+						sx={{
+							position: 'relative',
+							'*, *::after': {
+								boxSizing: 'border-box',
+								transformStyle: 'preserve-3d',
+							},
+						}}
+					>
+						<Desk
+							xyz={{
+								height: deskXYZ.height,
+								width: deskXYZ.width,
+								depth: deskXYZ.depth,
+							}}
+						>
+							<Keyboard
+								xyz={{
+									height: boardXYZ.height,
+									width: boardXYZ.width,
+									depth: boardXYZ.depth,
+								}}
+							/>
+						</Desk>
+					</Box>
+					<Window
+						title="Send Message"
+						open={showWindow}
+						handleClose={handleModalClose}
+					>
+						{WindowContents}
+					</Window>
+					{/* tmp modal */}
+					<Window
+						title="Work in Progress"
+						open={showComingSoonWindow}
+						handleClose={handleComingSoonClose}
+					>
+						{WindowContents}
+					</Window>
 				</Box>
-				<Window
-					title="Send Message"
-					open={showWindow}
-					handleClose={handleModalClose}
-				>
-					{WindowContents}
-				</Window>
-				{/* tmp modal */}
-				<Window
-					title="Work in Progress"
-					open={showComingSoonWindow}
-					handleClose={handleComingSoonClose}
-				>
-					{WindowContents}
-				</Window>
 			</Box>
-		</Box>
+		</>
 	)
 }
