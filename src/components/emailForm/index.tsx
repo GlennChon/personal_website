@@ -4,7 +4,7 @@ import { Box, Button, Fade, Grid, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import emailjs, { init } from 'emailjs-com'
+import emailjs, { init } from '@emailjs/browser'
 import env from '@beam-australia/react-env'
 
 const contactSchema = Yup.object().shape({
@@ -13,7 +13,7 @@ const contactSchema = Yup.object().shape({
 	message: Yup.string().trim().required('Message required'),
 })
 
-const EmailForm = ({}) => {
+const EmailForm = ({ }) => {
 	const [isSubmitted, setIsSubmitted] = useState(false)
 	const [formError, setFormError] = useState('')
 	useEffect(() => {

@@ -1,38 +1,45 @@
 {
-	"compilerOptions": {
-		"allowJs": true,
-		"allowSyntheticDefaultImports": true,
-		"jsx": "preserve",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"module": "esnext",
-		"moduleResolution": "node",
-		"noEmit": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"preserveConstEnums": true,
-		"removeComments": false,
-		"skipLibCheck": true,
-		"sourceMap": true,
-		"target": "es2021",
-		"strict": false,
-		"forceConsistentCasingInFileNames": true,
-		"allowUnreachableCode": false,
-		"esModuleInterop": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"baseUrl": "src/"
-	},
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		"public/assets/mp4/monitor/index.tsx",
-		"public/assets/mp4/special/index.tsx",
-		"public/assets/**/*",
-		"src/**/*",
-		"styles/**/*.tsx",
-		"styles/**/*.ts",
-		"styles"
-	],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "preserve",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2021",
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "allowUnreachableCode": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": "src/",
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "public/assets/mp4/monitor/index.tsx",
+    "public/assets/mp4/special/index.tsx",
+    "public/assets/**/*",
+    "src/**/*",
+    "styles/**/*.tsx",
+    "styles/**/*.ts",
+    "styles"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
